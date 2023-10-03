@@ -1,0 +1,35 @@
+setting:
+  seed: 20000812
+  os_environ:
+    CUDA_VISIBLE_DEVICES: 0,1,2,3,4,5,6,7
+    MASTER_ADDR: 127.0.0.1
+    MASTER_PORT: 12315
+    WORLD_SIZE: 1
+    NODE_RANK: 0
+
+  out_path: output/ProteinGym/SaProt_650M_AF2.tsv
+  dataset_dir: LMDB/ProteinGym/substitutions
+
+model:
+  model_py_path: esm/esm_foldseek_mutation_model
+  kwargs:
+    foldseek_path: bin/foldseek
+    config_path: weights/PLMs/SaProt_650M_AF2
+    load_pretrained: True
+    plddt_threshold: 70
+
+dataset:
+  dataset_py_path: mutation_zeroshot_dataset
+  dataloader_kwargs:
+    batch_size: 32
+    num_workers: 8
+  kwargs: {}
+
+Trainer:
+  log_every_n_steps: 1
+  devices: 1
+  accelerator: gpu
+  num_nodes: 1
+  strategy:
+    find_unused_parameters: False
+  logger: False

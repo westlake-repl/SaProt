@@ -1,0 +1,69 @@
+setting:
+  seed: 20000812
+  os_environ:
+    WANDB_API_KEY: ~
+    WANDB_RUN_ID: ~
+    CUDA_VISIBLE_DEVICES: 0,1,2,3,4,5,6,7
+    MASTER_ADDR: localhost
+    MASTER_PORT: 12315
+    WORLD_SIZE: 1
+    NODE_RANK: 0
+  wandb_config:
+    project: Thermostability
+    name: esm2_t33_650M_UR50D
+
+model:
+#    Which model to use
+  model_py_path: esm/esm_regression_model
+  kwargs:
+#    Arguments to initialize the specific class
+    config_path: weights/PLMs/esm2_t33_650M_UR50D
+    load_pretrained: True
+
+#    Arguments to initialize the basic class AbstractModel
+  lr_scheduler_kwargs:
+    last_epoch: -1
+    init_lr: 2.0e-5
+#    Weather to use this scheduler or not
+    on_use: false
+
+  optimizer_kwargs:
+    betas: [0.9, 0.98]
+    weight_decay: 0.01
+
+  save_path: weights/Thermostability/esm2_t33_650M_UR50D.pt
+
+
+dataset:
+#    Arguments to initialize the basic class LMDBDataset
+  dataset_py_path: esm/esm_regression_dataset
+  dataloader_kwargs:
+    batch_size: 2
+    num_workers: 8
+
+  train_lmdb: LMDB/Thermostability/normal/train
+  valid_lmdb: LMDB/Thermostability/normal/valid
+  test_lmdb: LMDB/Thermostability/normal/test
+#    Arguments to initialize the specific class
+  kwargs:
+    tokenizer: weights/PLMs/esm2_t33_650M_UR50D
+    mix_max_norm: [40, 67]
+
+
+#  Arguments to initialize Pytorch Lightning Trainer
+Trainer:
+  max_epochs: 200
+  log_every_n_steps: 1
+  strategy:
+    find_unused_parameters: True
+  logger: False
+  enable_checkpointing: false
+  val_check_interval: 0.5
+  accelerator: gpu
+  devices: 1
+  num_nodes: 1
+  accumulate_grad_batches: 1
+  precision: 16
+  num_sanity_val_steps: 0
+
+
