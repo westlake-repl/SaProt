@@ -20,8 +20,8 @@ We provide both huggingface version and
  SaProt. Users can choose either one to use. 
 
 ### Huggingface model
-We provide [SaProt](https://huggingface.co/Takagi-san/SaProt_650M_AF2) and 
-[SaProt-PDB](https://huggingface.co/Takagi-san/SaProt_650M_PDB) for various use cases
+We provide [SaProt](https://huggingface.co/westlake-repl/SaProt_650M_AF2) and 
+[SaProt-PDB](https://huggingface.co/westlake-repl/SaProt_650M_PDB) for various use cases
 . The following code shows how to load the model.
 ```
 from transformers import EsmTokenizer, EsmForMaskedLM
