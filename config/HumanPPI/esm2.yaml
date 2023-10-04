@@ -51,13 +51,13 @@ dataset:
 
 #  Arguments to initialize Pytorch Lightning Trainer
 Trainer:
-  max_epochs: 10
+  max_epochs: 20
   log_every_n_steps: 1
   strategy:
     find_unused_parameters: True
   logger: False
   enable_checkpointing: false
-  val_check_interval: 0.5
+  val_check_interval: 0.1
   accelerator: gpu
   devices: 1
   num_nodes: 1
