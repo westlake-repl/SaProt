@@ -92,7 +92,9 @@ Once downloaded, the datasets need to be decompressed and placed in the `LMDB` f
 ## Fine-tune SaProt
 We provide a script to fine-tune SaProt on the datasets. The following code shows how to fine-tune SaProt on specific
 downstream tasks. Before running the code, please make sure that the datasets are placed in the `LMDB` folder and the
-huggingface version of SaProt model is placed in the `weights/PLMs` folder.
+huggingface version of SaProt model is placed in the `weights/PLMs` folder. **Note that the default training setting is not as 
+same as in the paper because of the hardware limitation for different users. We recommend users to modify the yaml file 
+flexibly based on their own conditions (i.e. batch_size, devices and accumulate_grad_batches).**
 ```
 # Fine-tune SaProt on the Thermostability task
 python scripts/training.py -c config/Thermostability/saprot.yaml
