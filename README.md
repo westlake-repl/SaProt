@@ -21,9 +21,8 @@ bash environment.sh
 ``` 
  
 ## Prepare the SaProt model
-We provide both huggingface version and 
-[esm version](https://github.com/facebookresearch/esm) of
- SaProt. Users can choose either one to use. 
+We provide two ways to use SaProt, including through huggingface class and 
+through the same way as in [esm github](https://github.com/facebookresearch/esm). Users can choose either one to use. 
 
 ### Huggingface model
 We provide [SaProt](https://huggingface.co/westlake-repl/SaProt_650M_AF2) and 
