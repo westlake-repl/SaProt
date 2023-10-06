@@ -84,6 +84,10 @@ print(f"combined_seq: {combined_seq}")
 ```
 
 ## Prepare dataset
+### Pre-training dataset
+We are preparing the pre-training dataset and will release it soon.
+
+### Downstream tasks
 We provide datasets that are used in the paper. Datasets can be downloaded from 
 [here](https://drive.google.com/drive/folders/11dNGqPYfLE3M-Mbh4U7IQpuHxJpuRr4g?usp=sharing).
 
@@ -104,8 +108,7 @@ python scripts/training.py -c config/Thermostability/esm2.yaml
 ```
 ### Record the training process (optional)
 If you want to record the training process using wandb, you could modify the config file and set `Trainer.logger = True`
-and then paste your wandb API key in the config key `setting.os_environ.WANDB_API_KEY`. Other settings can be modified
-flexibly for your own needs.
+and then paste your wandb API key in the config key `setting.os_environ.WANDB_API_KEY`.
 
 ## Evaluate zero-shot performance
 We provide a script to evaluate the zero-shot performance of models (foldseek binary file is required to be placed in
@@ -118,3 +121,15 @@ python scripts/mutation_zeroshot.py -c config/ProteinGym/saprot.yaml
 python scripts/mutation_zeroshot.py -c config/ProteinGym/esm2.yaml
 ```
 The results will be saved in the `output/ProteinGym` folder.
+
+## Citation
+If you find this repository useful, please cite our paper:
+```
+@article{su2023saprot,
+  title={SaProt: Protein Language Modeling with Structure-aware Vocabulary},
+  author={Su, Jin and Han, Chenchen and Zhou, Yuyang and Shan, Junjie and Zhou, Xibin and Yuan, Fajie},
+  journal={bioRxiv},
+  year={2023},
+  publisher={Cold Spring Harbor Laboratory}
+}
+```
