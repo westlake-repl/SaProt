@@ -21,7 +21,7 @@ def run(config):
     data_module = load_dataset(config.dataset)
 
     # Initialize a trainer
-    trainer = load_trainer(config.Trainer)
+    trainer = load_trainer(config)
 
     # Train and validate
     trainer.fit(model=model, datamodule=data_module)

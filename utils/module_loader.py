@@ -70,7 +70,7 @@ def load_strategy(config):
 
 # Initialize a pytorch lightning trainer
 def load_trainer(config):
-    trainer_config = copy.deepcopy(config)
+    trainer_config = copy.deepcopy(config.Trainer)
     
     # Initialize wandb
     if trainer_config.logger:
