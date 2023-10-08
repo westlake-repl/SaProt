@@ -53,7 +53,7 @@ dataset:
 
 #  Arguments to initialize Pytorch Lightning Trainer
 Trainer:
-  max_epochs: 100
+  max_epochs: 200
   log_every_n_steps: 1
   strategy:
     find_unused_parameters: True
