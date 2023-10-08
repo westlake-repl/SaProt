@@ -99,10 +99,7 @@ class EsmBaseModel(AbstractModel):
 
         # Add extra config if needed
         if self.extra_config is None:
-            self.extra_config = {
-                "hidden_dropout_prob": 0.1,
-                "attention_probs_dropout_prob": 0.1,
-            }
+            self.extra_config = {}
 
         for k, v in self.extra_config.items():
             setattr(config, k, v)
