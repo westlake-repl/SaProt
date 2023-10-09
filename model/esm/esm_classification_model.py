@@ -24,8 +24,19 @@ class EsmClassificationModel(EsmBaseModel):
         if coords is not None:
             inputs = self.add_bias_feature(inputs, coords)
 
-        outputs = self.model(**inputs)
-        return outputs.logits
+        # If backbone is frozen, the embedding will be the average of all residues
+        if self.freeze_backbone:
+            repr = torch.stack(self.get_hidden_states(inputs, reduction="mean"))
+            x = self.model.classifier.dropout(repr)
+            x = self.model.classifier.dense(x)
+            x = torch.tanh(x)
+            x = self.model.classifier.dropout(x)
+            logits = self.model.classifier.out_proj(x)
+
+        else:
+            logits = self.model(**inputs).logits
+
+        return logits
 
     def loss_func(self, stage, logits, labels):
         label = labels['labels']

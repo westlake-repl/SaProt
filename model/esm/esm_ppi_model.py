@@ -32,10 +32,14 @@ class EsmPPIModel(EsmBaseModel):
         return {f"{stage}_acc": torchmetrics.Accuracy()}
 
     def forward(self, inputs_1, inputs_2):
-        hidden_1 = self.model.esm(**inputs_1)[0][:, 0, :]
-        hidden_2 = self.model.esm(**inputs_2)[0][:, 0, :]
-        hidden_concat = torch.cat([hidden_1, hidden_2], dim=-1)
+        if self.freeze_backbone:
+            hidden_1 = torch.stack(self.get_hidden_states(inputs_1, reduction="mean"))
+            hidden_2 = torch.stack(self.get_hidden_states(inputs_2, reduction="mean"))
+        else:
+            hidden_1 = self.model.esm(**inputs_1)[0][:, 0, :]
+            hidden_2 = self.model.esm(**inputs_2)[0][:, 0, :]
 
+        hidden_concat = torch.cat([hidden_1, hidden_2], dim=-1)
         return self.model.classifier(hidden_concat)
     
     def loss_func(self, stage, logits, labels):

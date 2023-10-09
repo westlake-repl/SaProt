@@ -27,9 +27,20 @@ class EsmRegressionModel(EsmBaseModel):
         if structure_info:
             # To be implemented
             raise NotImplementedError
-        
-        outputs = self.model(**inputs)
-        return outputs.logits.squeeze(dim=-1)
+
+        # If backbone is frozen, the embedding will be the average of all residues
+        if self.freeze_backbone:
+            repr = torch.stack(self.get_hidden_states(inputs, reduction="mean"))
+            x = self.model.classifier.dropout(repr)
+            x = self.model.classifier.dense(x)
+            x = torch.tanh(x)
+            x = self.model.classifier.dropout(x)
+            logits = self.model.classifier.out_proj(x)
+
+        else:
+            logits = self.model(**inputs).logits.squeeze(dim=-1)
+
+        return logits
 
     def loss_func(self, stage, outputs, labels):
         fitness = labels['labels'].to(outputs)
