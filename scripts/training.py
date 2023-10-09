@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('.')
 
 import yaml
@@ -32,10 +33,10 @@ def run(config):
             # Load LoRA model
             config.model.kwargs.lora_config_path = model.save_path
             model = load_model(config.model)
-        
+
         else:
             model.load_checkpoint(model.save_path, load_prev_scheduler=model.load_prev_scheduler)
-        
+
     trainer.test(model=model, datamodule=data_module)
 
 
@@ -48,17 +49,22 @@ def get_args():
 def main(args):
     with open(args.config, 'r', encoding='utf-8') as r:
         config = EasyDict(yaml.safe_load(r))
-        
+
     if config.setting.seed:
         setup_seed(config.setting.seed)
-
-    if config.setting.os_environ.NODE_RANK != 0:
-        config.Trainer.logger = False
 
     # set os environment variables
     for k, v in config.setting.os_environ.items():
         if v is not None and k not in os.environ:
             os.environ[k] = str(v)
+
+        elif k in os.environ:
+            # override the os environment variables
+            config.setting.os_environ[k] = os.environ[k]
+
+    # Only the root node will print the log
+    if config.setting.os_environ.NODE_RANK != 0:
+        config.Trainer.logger = False
 
     run(config)
 
