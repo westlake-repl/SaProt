@@ -114,13 +114,20 @@ and then paste your wandb API key in the config key `setting.os_environ.WANDB_AP
 We provide a script to evaluate the zero-shot performance of models (foldseek binary file is required to be placed in
 the `bin` folder):
 ```
-# Fine-tune SaProt on the ProteinGym benchmark
+# Evaluate the zero-shot performance of SaProt on the ProteinGym benchmark
 python scripts/mutation_zeroshot.py -c config/ProteinGym/saprot.yaml
 
-# Fine-tune ESM-2 on the ProteinGym benchmark
+# Evaluate the zero-shot performance of ESM-2 on the ProteinGym benchmark
 python scripts/mutation_zeroshot.py -c config/ProteinGym/esm2.yaml
 ```
 The results will be saved in the `output/ProteinGym` folder.
+
+For **ClinVar** benchmark, you can use the following script to calculate the AUC metric:
+```
+# Evaluate the zero-shot performance of SaProt on the ClinVar benchmark
+python scripts/mutation_zeroshot.py -c config/ClinVar/saprot.yaml
+python scripts/compute_clinvar_auc.py -c config/ClinVar/saprot.yaml
+```
 
 ## Citation
 If you find this repository useful, please cite our paper:
