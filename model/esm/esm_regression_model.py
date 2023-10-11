@@ -35,7 +35,7 @@ class EsmRegressionModel(EsmBaseModel):
             x = self.model.classifier.dense(x)
             x = torch.tanh(x)
             x = self.model.classifier.dropout(x)
-            logits = self.model.classifier.out_proj(x)
+            logits = self.model.classifier.out_proj(x).squeeze(dim=-1)
 
         else:
             logits = self.model(**inputs).logits.squeeze(dim=-1)
