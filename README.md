@@ -85,7 +85,7 @@ print(f"combined_seq: {combined_seq}")
 
 ## Prepare dataset
 ### Pre-training dataset
-We are preparing the pre-training dataset and will release it soon.
+We are preparing the pre-training dataset and will release it once our paper is accepted.
 
 ### Downstream tasks
 We provide datasets that are used in the paper. Datasets can be downloaded from 
