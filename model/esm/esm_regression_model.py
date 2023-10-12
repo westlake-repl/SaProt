@@ -52,8 +52,10 @@ class EsmRegressionModel(EsmBaseModel):
             metric.update(outputs.detach().float(), fitness.float())
         
         if stage == "train":
-            log_dict = self.get_log_dict("train")
-            self.log_info(log_dict)
+            # Skip calculating metrics if the batch size is 1
+            if fitness.shape[0] > 1:
+                log_dict = self.get_log_dict("train")
+                self.log_info(log_dict)
             
             # Reset train metrics
             self.reset_metrics("train")
