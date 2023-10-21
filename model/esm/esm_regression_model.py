@@ -35,7 +35,7 @@ class EsmRegressionModel(EsmBaseModel):
             x = self.model.classifier.dense(x)
             x = torch.tanh(x)
             x = self.model.classifier.dropout(x)
-            logits = self.model.classifier.out_proj(x)
+            logits = self.model.classifier.out_proj(x).squeeze(dim=-1)
 
         else:
             logits = self.model(**inputs).logits.squeeze(dim=-1)
@@ -52,8 +52,10 @@ class EsmRegressionModel(EsmBaseModel):
             metric.update(outputs.detach().float(), fitness.float())
         
         if stage == "train":
-            log_dict = self.get_log_dict("train")
-            self.log_info(log_dict)
+            # Skip calculating metrics if the batch size is 1
+            if fitness.shape[0] > 1:
+                log_dict = self.get_log_dict("train")
+                self.log_info(log_dict)
             
             # Reset train metrics
             self.reset_metrics("train")
