@@ -1,7 +1,7 @@
 # SaProt: Protein Language Modeling with Structure-aware Vocabulary
 The repository is an official implementation of [SaProt: Protein Language Modeling with Structure-aware Vocabulary](https://www.biorxiv.org/content/10.1101/2023.10.01.560349v2).
 
-If you have any questions about the paper or the code, feel free to raise an issue!
+If you have any question about the paper or the code, feel free to raise an issue!
 ## Overview
 We propose a structure-aware vocabulary for protein language modeling. The vocabulary is constructed by encoding the 
 protein structure into discrete 3D tokens by using the [foldseek](https://github.com/steineggerlab/foldseek). We combine the residue tokens and the structure tokens to form a structure-aware sequence. 

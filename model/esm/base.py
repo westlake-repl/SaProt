@@ -87,7 +87,7 @@ class EsmBaseModel(AbstractModel):
             print("LoRA model is initialized for training.")
             self.model.print_trainable_parameters()
 
-        # After LoRA model is initialized, add trainable parameters to optimizer)
+        # After LoRA model is initialized, add trainable parameters to optimizer
         self.init_optimizers()
 
     def initialize_model(self):
@@ -182,20 +182,20 @@ class EsmBaseModel(AbstractModel):
 
         return repr_list
 
-    def add_bias_feature(self, inputs, coords: List[Dict]) -> torch.Tensor:
-        """
-        Add structure information as biases to attention map. This function is used to add structure information
-        to the model as Evoformer does.
-
-        Args:
-            inputs: A dictionary of inputs. It should contain keys ["input_ids", "attention_mask", "token_type_ids"].
-            coords: Coordinates of backbone atoms. Each element is a dictionary with keys ["N", "CA", "C", "O"].
-
-        Returns
-            pair_feature: A tensor of shape [B, L, L, 407]. Here 407 is the RBF of distance(400) + angle(7).
-        """
-        inputs["pair_feature"] = batch_coords2feature(coords, self.model.device)
-        return inputs
+    # def add_bias_feature(self, inputs, coords: List[Dict]) -> torch.Tensor:
+    #     """
+    #     Add structure information as biases to attention map. This function is used to add structure information
+    #     to the model as Evoformer does.
+    #
+    #     Args:
+    #         inputs: A dictionary of inputs. It should contain keys ["input_ids", "attention_mask", "token_type_ids"].
+    #         coords: Coordinates of backbone atoms. Each element is a dictionary with keys ["N", "CA", "C", "O"].
+    #
+    #     Returns
+    #         pair_feature: A tensor of shape [B, L, L, 407]. Here 407 is the RBF of distance(400) + angle(7).
+    #     """
+    #     inputs["pair_feature"] = batch_coords2feature(coords, self.model.device)
+    #     return inputs
 
     def save_checkpoint(self, save_info: dict = None) -> None:
         """
