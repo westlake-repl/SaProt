@@ -51,7 +51,7 @@ dataset:
 
   train_lmdb: LMDB/AF2_Uniref50/foldseek/train
   valid_lmdb: LMDB/AF2_Uniref50/foldseek/valid
-  test_lmdb: /LMDB/AF2_Uniref50/foldseek/valid
+  test_lmdb: LMDB/AF2_Uniref50/foldseek/valid
 #    Arguments to initialize the specific class
   kwargs:
     tokenizer: weights/PLMs/SaProt_650M_AF2
