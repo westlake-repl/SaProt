@@ -25,13 +25,19 @@ bash environment.sh
 ```
 
 ## Prepare the SaProt model
-We provide two ways to use SaProt, including through huggingface class and  through the same way as in [esm github](https://github.com/facebookresearch/esm). Users can choose either one to use. 
+We provide two ways to use SaProt, including through huggingface class and  through the same way in [esm github](https://github.com/facebookresearch/esm). Users can choose either one to use. 
 
+### Model checkpoints
+
+| **Name**                                                     | **Size**        | Dataset                                                   |
+| ------------------------------------------------------------ | --------------- | --------------------------------------------------------- |
+| [SaProt_35M_AF2](https://huggingface.co/westlake-repl/SaProt_35M_AF2) | 35M parameters  | 40M AF2 structures                                        |
+| [SaProt_650M_PDB](https://huggingface.co/westlake-repl/SaProt_650M_PDB) | 650M parameters | 40M AF2 structures (phase1) + 60K PDB structures (phase2) |
+| [SaProt_650M_AF2](https://huggingface.co/westlake-repl/SaProt_35M_AF2) | 650M parameters | 40M AF2 structures                                        |
 
 ### Huggingface model
-We provide [SaProt](https://huggingface.co/westlake-repl/SaProt_650M_AF2) and 
-[SaProt-PDB](https://huggingface.co/westlake-repl/SaProt_650M_PDB) for various use cases
-. The following code shows how to load the model.
+
+The following code shows how to load the model based on huggingface class.
 
 ```
 from transformers import EsmTokenizer, EsmForMaskedLM
