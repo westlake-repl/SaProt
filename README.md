@@ -27,18 +27,6 @@ bash environment.sh
 ## Prepare the SaProt model
 We provide two ways to use SaProt, including through huggingface class and  through the same way as in [esm github](https://github.com/facebookresearch/esm). Users can choose either one to use. 
 
-### Experimental results
-
-|   **Model**   | **ProteinGym** | **ClinVar** | **Thermostability** | **HumanPPI** | **Metal Ion Binding** | **EC** | **GO-MF** | **GO-BP** | **GO-CC** | DeepLoc-**Subcellular** | **DeepLoc-Binary** |
-| :-----------: | :------------: | :---------: | :-----------------: | :----------: | :-------------------: | :----: | :-------: | :-------: | :-------: | :---------------------: | :----------------: |
-|               |  Spearman's ρ  |     AUC     |    Spearman's ρ     |     Acc%     |         Acc%          |  Fmax  |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
-|  ESM-2 (35M)  |                |             |                     |              |                       |        |           |           |           |                         |                    |
-| ESM-2 (650M)  |                |             |                     |              |                       |        |           |           |           |                         |                    |
-| SaProt (35M)  |                |             |                     |              |                       |        |           |           |           |                         |                    |
-| SaProt (650M) |                |             |                     |              |                       |        |           |           |           |                         |                    |
-
-
-
 
 ### Huggingface model
 We provide [SaProt](https://huggingface.co/westlake-repl/SaProt_650M_AF2) and 
