@@ -4,7 +4,7 @@ The repository is an official implementation of [SaProt: Protein Language Modeli
 If you have any question about the paper or the code, feel free to raise an issue!
 
 ## News
-- **2023/10/30**: We release a pre-trained [SaProt 35M model](https://huggingface.co/westlake-repl/SaProt_35M_AF2) and a [35M residue-sequence-only version of SaProt](https://huggingface.co/westlake-repl/SaProt_35M_AF2_seqOnly) (for comparison)! The residue-sequence-only SaProt (without 3Di token) performs highly similar to the official ESM-2 35M model. (see Results below)
+- **2023/10/30**: We release a pre-trained [SaProt 35M model](https://huggingface.co/westlake-repl/SaProt_35M_AF2) and a [35M residue-sequence-only version of SaProt](https://huggingface.co/westlake-repl/SaProt_35M_AF2_seqOnly) (for comparison)! The residue-sequence-only SaProt (without 3Di token) performs highly similar to the official ESM-2 35M model. (see Results below).
 
 
 ## Overview
@@ -56,6 +56,18 @@ Some experimental results are listed below. For more details, please refer to ou
 |               |  Spearman's ρ  |     AUC     |    Spearman's ρ     |     Acc%     |         Acc%          |   Fmax    |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
 | ESM-2 (650M)  |     0.475      |    0.862    |        0.680        |    76.67     |         71.56         |   0.877   |   0.668   |   0.345   |   0.411   |          82.09          |       91.96        |
 | SaProt (650M) |   **0.478**    |  **0.909**  |      **0.724**      |  **86.41**   |       **75.75**       | **0.884** | **0.678** | **0.356** | **0.414** |        **85.57**        |     **93.55**      |
+
+#### AlphaFold2 vs. ESMFold
+
+We compare structures predicted by AF2 or ESMFold, which is shown below:
+
+|    **model**     | **ProteinGym** | **ClinVar** | **Thermostability** | **HumanPPI** | **Metal Ion Binding** |  **EC**   | **GO-MF** | **GO-BP** | **GO-CC** | DeepLoc-**Subcellular** | **DeepLoc-Binary** |
+| :--------------: | :------------: | :---------: | :-----------------: | :----------: | :-------------------: | :-------: | :-------: | :-------: | :-------: | :---------------------: | :----------------: |
+|                  |  Spearman's ρ  |     AUC     |    Spearman's ρ     |     Acc%     |         Acc%          |   Fmax    |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
+| SaProt (ESMFold) |     0.455      |    0.896    |        0.717        |    85.78     |         74.10         |   0.870   |   0.675   |   0.340   |   0.407   |          82.82          |       93.19        |
+|   SaProt (AF2)   |   **0.478**    |  **0.909**  |      **0.724**      |  **86.41**   |       **75.75**       | **0.884** | **0.678** | **0.356** | **0.414** |        **85.57**        |     **93.55**      |
+
+## Load SaProt
 
 ### Huggingface model
 
