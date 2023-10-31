@@ -4,7 +4,7 @@ The repository is an official implementation of [SaProt: Protein Language Modeli
 If you have any question about the paper or the code, feel free to raise an issue!
 
 ## News
-- **2023/10/30**: We release a pre-trained [SaProt 35M model](https://huggingface.co/westlake-repl/SaProt_35M_AF2) and a [35M residue-sequence-only version of SaProt](https://huggingface.co/westlake-repl/SaProt_35M_AF2_seqOnly) (for comparison)! The sequence-only SaProt performs very similar to the ESM-2 35M model. 
+- **2023/10/30**: We release a pre-trained [SaProt 35M model](https://huggingface.co/westlake-repl/SaProt_35M_AF2) and a [35M residue-sequence-only version of SaProt](https://huggingface.co/westlake-repl/SaProt_35M_AF2_seqOnly) (for comparison)! The sequence-only SaProt performs highly similar to the ESM-2 35M model as we follow the same training setup. 
 
 ## Overview
 We propose a structure-aware vocabulary for protein language modeling. The vocabulary is constructed by encoding the 
