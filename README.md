@@ -4,7 +4,8 @@ The repository is an official implementation of [SaProt: Protein Language Modeli
 If you have any question about the paper or the code, feel free to raise an issue!
 
 ## News
-- **2023/10/30**: We release a pre-trained [SaProt 35M model](https://huggingface.co/westlake-repl/SaProt_35M_AF2) and a [35M residue sequence-only version of SaProt](https://huggingface.co/westlake-repl/SaProt_35M_AF2_seqOnly) (for comparison)! The sequence-only SaProt performs competitively with ESM-2 35M model. 
+- **2023/10/30**: We release a pre-trained [SaProt 35M model](https://huggingface.co/westlake-repl/SaProt_35M_AF2) and a [35M residue-sequence-only version of SaProt](https://huggingface.co/westlake-repl/SaProt_35M_AF2_seqOnly) (for comparison)! The residue-sequence-only SaProt (without 3Di token) performs highly similar to the official ESM-2 35M model. (see Results below)
+
 
 ## Overview
 We propose a structure-aware vocabulary for protein language modeling. The vocabulary is constructed by encoding the 
@@ -39,13 +40,22 @@ We provide two ways to use SaProt, including through huggingface class and  thro
 
 Some experimental results are listed below. For more details, please refer to our paper.
 
-|   **Model**   | **ProteinGym** | **ClinVar** | **Thermostability** | **HumanPPI** | **Metal Ion Binding** | **EC** | **GO-MF** | **GO-BP** | **GO-CC** | DeepLoc-**Subcellular** | **DeepLoc-Binary** |
-| :-----------: | :------------: | :---------: | :-----------------: | :----------: | :-------------------: | :----: | :-------: | :-------: | :-------: | :---------------------: | :----------------: |
-|               |  Spearman's ρ  |     AUC     |    Spearman's ρ     |     Acc%     |         Acc%          |  Fmax  |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
-|  ESM-2 (35M)  |     0.339      |    0.722    |        0.669        |    80.79     |         73.08         | 0.841  |   0.629   |   0.298   |   0.349   |          76.58          |       91.60        |
-| SaProt (35M)  |     0.392      |    0.794    |        0.692        |    81.11     |         73.23         | 0.823  |   0.624   |   0.293   |   0.335   |          76.67          |       91.16        |
-| ESM-2 (650M)  |     0.475      |    0.862    |        0.680        |    76.67     |         71.56         | 0.877  |   0.668   |   0.345   |   0.411   |          82.09          |       91.96        |
-| SaProt (650M) |     0.478      |    0.909    |        0.724        |    86.41     |         75.75         | 0.884  |   0.678   |   0.356   |   0.414   |          85.57          |       93.55        |
+#### 35M Model
+
+|    **Model**     | **ProteinGym** | **ClinVar** | **Thermostability** | **HumanPPI** | **Metal Ion Binding** |  **EC**   | **GO-MF** | **GO-BP** | **GO-CC** | DeepLoc-**Subcellular** | **DeepLoc-Binary** |
+| :--------------: | :------------: | :---------: | :-----------------: | :----------: | :-------------------: | :-------: | :-------: | :-------: | :-------: | :---------------------: | :----------------: |
+|                  |  Spearman's ρ  |     AUC     |    Spearman's ρ     |     Acc%     |         Acc%          |   Fmax    |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
+|   ESM-2 (35M)    |     0.339      |    0.722    |        0.669        |    80.79     |         73.08         |   0.841   |   0.629   |   0.298   |   0.349   |          76.58          |       91.60        |
+| SaProt-Seq (35M) |     0.337      |    0.738    |        0.672        |    80.56     |         73.23         |   0.823   |   0.624   |   0.293   |   0.335   |          76.67          |       91.16        |
+|   SaProt (35M)   |   **0.392**    |  **0.794**  |      **0.692**      |  **81.11**   |       **74.29**       | **0.844** | **0.648** | **0.314** | **0.365** |        **78.09**        |     **91.97**      |
+
+#### 650M  Model
+
+|   **Model**   | **ProteinGym** | **ClinVar** | **Thermostability** | **HumanPPI** | **Metal Ion Binding** |  **EC**   | **GO-MF** | **GO-BP** | **GO-CC** | DeepLoc-**Subcellular** | **DeepLoc-Binary** |
+| :-----------: | :------------: | :---------: | :-----------------: | :----------: | :-------------------: | :-------: | :-------: | :-------: | :-------: | :---------------------: | :----------------: |
+|               |  Spearman's ρ  |     AUC     |    Spearman's ρ     |     Acc%     |         Acc%          |   Fmax    |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
+| ESM-2 (650M)  |     0.475      |    0.862    |        0.680        |    76.67     |         71.56         |   0.877   |   0.668   |   0.345   |   0.411   |          82.09          |       91.96        |
+| SaProt (650M) |   **0.478**    |  **0.909**  |      **0.724**      |  **86.41**   |       **75.75**       | **0.884** | **0.678** | **0.356** | **0.414** |        **85.57**        |     **93.55**      |
 
 ### Huggingface model
 
