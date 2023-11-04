@@ -36,7 +36,7 @@ We provide two ways to use SaProt, including through huggingface class and  thro
 | [SaProt_650M_PDB](https://huggingface.co/westlake-repl/SaProt_650M_PDB) | 650M parameters | 40M AF2 structures (phase1) + 60K PDB structures (phase2) |
 | [SaProt_650M_AF2](https://huggingface.co/westlake-repl/SaProt_35M_AF2) | 650M parameters | 40M AF2 structures                                        |
 
-### Experimental results
+### New Experimental results
 
 Some experimental results are listed below. For more details, please refer to our paper.
 
