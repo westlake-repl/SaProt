@@ -5,7 +5,7 @@ If you have any question about the paper or the code, feel free to raise an issu
 
 ## News
 - **2023/10/30**: We release a pre-trained [SaProt 35M model](https://huggingface.co/westlake-repl/SaProt_35M_AF2) and a [35M residue-sequence-only version of SaProt](https://huggingface.co/westlake-repl/SaProt_35M_AF2_seqOnly) (for comparison)! The residue-sequence-only SaProt (without 3Di token) performs highly similar to the official ESM-2 35M model. (see Results below).
-
+- **2023/10/30**: We released the results by using ESMFold structures. See Table below
 
 ## Overview
 We propose a structure-aware vocabulary for protein language modeling. The vocabulary is constructed by encoding the 
@@ -36,7 +36,7 @@ We provide two ways to use SaProt, including through huggingface class and  thro
 | [SaProt_650M_PDB](https://huggingface.co/westlake-repl/SaProt_650M_PDB) | 650M parameters | 40M AF2 structures (phase1) + 60K PDB structures (phase2) |
 | [SaProt_650M_AF2](https://huggingface.co/westlake-repl/SaProt_35M_AF2) | 650M parameters | 40M AF2 structures                                        |
 
-### Experimental results
+### New Experimental results
 
 Some experimental results are listed below. For more details, please refer to our paper.
 
