@@ -4,6 +4,7 @@ The repository is an official implementation of [SaProt: Protein Language Modeli
 If you have any question about the paper or the code, feel free to raise an issue!
 
 ## News
+- **2024/01/17**: Our paper has been accepted as **ICLR 2024 spotlight** 🎉🎉🎉!
 - **2023/10/30**: We release a pre-trained [SaProt 35M model](https://huggingface.co/westlake-repl/SaProt_35M_AF2) and a [35M residue-sequence-only version of SaProt](https://huggingface.co/westlake-repl/SaProt_35M_AF2_seqOnly) (for comparison)! The residue-sequence-only SaProt (without 3Di token) performs highly similar to the official ESM-2 35M model. (see Results below).
 - **2023/10/30**: We released the results by using ESMFold structures. See Table below
 
@@ -34,7 +35,7 @@ We provide two ways to use SaProt, including through huggingface class and  thro
 | ------------------------------------------------------------ | --------------- | --------------------------------------------------------- |
 | [SaProt_35M_AF2](https://huggingface.co/westlake-repl/SaProt_35M_AF2) | 35M parameters  | 40M AF2 structures                                        |
 | [SaProt_650M_PDB](https://huggingface.co/westlake-repl/SaProt_650M_PDB) | 650M parameters | 40M AF2 structures (phase1) + 60K PDB structures (phase2) |
-| [SaProt_650M_AF2](https://huggingface.co/westlake-repl/SaProt_35M_AF2) | 650M parameters | 40M AF2 structures                                        |
+| [SaProt_650M_AF2](https://huggingface.co/westlake-repl/SaProt_650M_AF2) | 650M parameters | 40M AF2 structures                                        |
 
 ### New Experimental results
 
@@ -130,7 +131,8 @@ print(f"combined_seq: {combined_seq}")
 
 ## Prepare dataset
 ### Pre-training dataset
-We are preparing the pre-training dataset and will release it once our paper is accepted.
+We provide the dataset for pre-training SaProt. The dataset can be downloaded from
+[here](https://huggingface.co/datasets/westlake-repl/AF2_UniRef50).
 
 ### Downstream tasks
 We provide datasets that are used in the paper. Datasets can be downloaded from 
