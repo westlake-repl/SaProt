@@ -4,6 +4,7 @@ The repository is an official implementation of [SaProt: Protein Language Modeli
 If you have any question about the paper or the code, feel free to raise an issue!
 
 ## News
+- **2024/03/08**: We uploaded a simple function to make zero-shot prediction of mutational effect (see example below).
 - **2024/01/17**: Our paper has been accepted as **ICLR 2024 spotlight** 🎉🎉🎉!
 - **2023/10/30**: We release a pre-trained [SaProt 35M model](https://huggingface.co/westlake-repl/SaProt_35M_AF2) and a [35M residue-sequence-only version of SaProt](https://huggingface.co/westlake-repl/SaProt_35M_AF2_seqOnly) (for comparison)! The residue-sequence-only SaProt (without 3Di token) performs highly similar to the official ESM-2 35M model. (see Results below).
 - **2023/10/30**: We released the results by using ESMFold structures. See Table below
@@ -127,6 +128,36 @@ seq, foldseek_seq, combined_seq = parsed_seqs
 print(f"seq: {seq}")
 print(f"foldseek_seq: {foldseek_seq}")
 print(f"combined_seq: {combined_seq}")
+```
+
+## Predict mutational effect
+We provide a function to predict the mutational effect of a protein sequence. The example below shows how to predict
+the mutational effect at a specific position.
+```
+from model.esm.esm_foldseek_mutation_model import EsmFoldseekMutationModel
+
+
+config = {
+    "foldseek_path": None,
+    "config_path": "/your/path/to/SaProt_650M_AF2",
+    "load_pretrained": True,
+}
+model = EsmFoldseekMutationModel(**config)
+tokenizer = model.tokenizer
+
+device = "cuda"
+model.eval()
+model.to(device)
+
+seq = "MdEvVpQpLrVyQdYaKv"
+# Predict the effect of mutating the 3rd amino acid to A
+mut_info = "V3A"
+mut_value = model.predict_mut(seq, mut_info)
+print(mut_value)
+
+"""
+-1.5347126722335815
+"""
 ```
 
 ## Prepare dataset
