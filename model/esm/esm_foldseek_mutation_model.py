@@ -275,17 +275,17 @@ class EsmFoldseekMutationModel(EsmBaseModel):
     
     def predict_mut(self, seq: str, mut_info: str) -> float:
         """
-        Predict the mutational effect of a given mutation
-        Args:
-            seq: The wild type sequence
+               Predict the mutational effect of a given mutation
+               Args:
+                   seq: The wild type sequence
 
-            mut_info: The mutation information in the format of "A123B", where A is the original amino acid, 123 is the
-                      position and B is the mutated amino acid. If multiple mutations are provided, they should be
-                      separated by colon, e.g. "A123B:C124D".
+                   mut_info: The mutation information in the format of "A123B", where A is the original amino acid, 123 is the
+                             position and B is the mutated amino acid. If multiple mutations are provided, they should be
+                             separated by colon, e.g. "A123B:C124D".
 
-        Returns:
-            The predicted mutational effect
-        """
+               Returns:
+                   The predicted mutational effect
+               """
         tokens = self.tokenizer.tokenize(seq)
         for single in mut_info.split(":"):
             pos = int(single[1:-1])
@@ -312,3 +312,72 @@ class EsmFoldseekMutationModel(EsmBaseModel):
                 score += torch.log(mut_prob / ori_prob)
         
         return score.item()
+    
+    def predict_pos_mut(self, seq: str, pos: int) -> dict:
+        """
+        Predict the mutational effect of mutations at a given position
+        Args:
+            seq: The wild type sequence
+
+            pos: The position of the mutation
+
+        Returns:
+            The predicted mutational effect
+        """
+        tokens = self.tokenizer.tokenize(seq)
+        ori_aa = tokens[pos - 1][0]
+        tokens[pos - 1] = "#" + tokens[pos - 1][-1]
+        
+        mask_seq = " ".join(tokens)
+        inputs = self.tokenizer(mask_seq, return_tensors="pt")
+        inputs = {k: v.to(self.device) for k, v in inputs.items()}
+        
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+            logits = outputs.logits
+            probs = logits.softmax(dim=-1)[0, pos]
+            
+            scores = {}
+            ori_st = self.tokenizer.get_vocab()[ori_aa + foldseek_struc_vocab[0]]
+            for mut_aa in aa_list:
+                mut_st = self.tokenizer.get_vocab()[mut_aa + foldseek_struc_vocab[0]]
+                
+                ori_prob = probs[ori_st: ori_st + len(foldseek_struc_vocab)].sum()
+                mut_prob = probs[mut_st: mut_st + len(foldseek_struc_vocab)].sum()
+                
+                score = torch.log(mut_prob / ori_prob)
+                scores[f"{ori_aa}{pos}{mut_aa}"] = score.item()
+        
+        return scores
+    
+    def predict_pos_prob(self, seq: str, pos: int) -> dict:
+        """
+        Predict the probability of all amino acids at a given position
+        Args:
+            seq: The wild type sequence
+
+            pos: The position of the mutation
+
+        Returns:
+            The predicted probability of all amino acids
+        """
+        tokens = self.tokenizer.tokenize(seq)
+        tokens[pos - 1] = "#" + tokens[pos - 1][-1]
+        
+        mask_seq = " ".join(tokens)
+        inputs = self.tokenizer(mask_seq, return_tensors="pt")
+        inputs = {k: v.to(self.device) for k, v in inputs.items()}
+        
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+            logits = outputs.logits
+            probs = logits.softmax(dim=-1)[0, pos]
+            
+            scores = {}
+            for aa in aa_list:
+                st = self.tokenizer.get_vocab()[aa + foldseek_struc_vocab[0]]
+                prob = probs[st: st + len(foldseek_struc_vocab)].sum()
+                
+                scores[aa] = prob.item()
+        
+        return scores
