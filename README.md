@@ -140,7 +140,7 @@ from model.esm.esm_foldseek_mutation_model import EsmFoldseekMutationModel
 
 config = {
     "foldseek_path": None,
-    "config_path": "/sujin/Models/SaProt/SaProt_650M_AF2",
+    "config_path": "/you/path/to/SaProt_650M_AF2",
     "load_pretrained": True,
 }
 model = EsmFoldseekMutationModel(**config)
