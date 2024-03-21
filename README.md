@@ -18,7 +18,7 @@ If you have any question about the paper or the code, feel free to raise an issu
   - [New experimental results](#New-experimental-results)
 - [Load SaProt](#Load-SaProt)
   - [Hugging Face model](#Hugging-Face-model)
-  - [esm model](#esm-model)
+  - [Load SaProt using esm repository](#Load-SaProt-using-esm-repository)
 - [Convert protein structure into structure-aware sequence](#Convert-protein-structure-into-structure-aware-sequence)
 - [Predict mutational effect](#Predict-mutational-effect)
 - [Prepare dataset](#Prepare-dataset)
@@ -129,8 +129,9 @@ torch.Size([1, 11, 446])
 """
 ```
 
-### esm model
-The esm version is also stored in the same huggingface folder, named `SaProt_650M_AF2.pt`. We provide a function to load the model.
+### Load SaProt using esm repository
+User could also load SaProt by [esm](https://github.com/facebookresearch/esm) implementation. The checkpoint is
+stored in the same huggingface folder, named `SaProt_650M_AF2.pt`. We provide a function to load the model.
 ```
 from utils.esm_loader import load_esm_saprot
 
