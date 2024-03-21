@@ -1,9 +1,11 @@
 # SaProt: Protein Language Modeling with Structure-aware Vocabulary
 The repository is an official implementation of [SaProt: Protein Language Modeling with Structure-aware Vocabulary](https://www.biorxiv.org/content/10.1101/2023.10.01.560349v2).
 
-If you have any question about the paper or the code, feel free to raise an issue!
+If you have any question about the paper or the code, feel free to raise an issue! Saprot should outperform ESM-2 in most tasks under fair evaluation settings.
 
 ## News
+- **2024/03/08**: We uploaded a simple function to make zero-shot prediction of mutational effect (see [example](#predict-mutational-effect)
+below).
 - **2024/01/17**: Our paper has been accepted as **ICLR 2024 spotlight** 🎉🎉🎉!
 - **2023/10/30**: We release a pre-trained [SaProt 35M model](https://huggingface.co/westlake-repl/SaProt_35M_AF2) and a [35M residue-sequence-only version of SaProt](https://huggingface.co/westlake-repl/SaProt_35M_AF2_seqOnly) (for comparison)! The residue-sequence-only SaProt (without 3Di token) performs highly similar to the official ESM-2 35M model. (see Results below).
 - **2023/10/30**: We released the results by using ESMFold structures. See Table below
@@ -127,6 +129,52 @@ seq, foldseek_seq, combined_seq = parsed_seqs
 print(f"seq: {seq}")
 print(f"foldseek_seq: {foldseek_seq}")
 print(f"combined_seq: {combined_seq}")
+```
+
+## Predict mutational effect
+We provide a function to predict the mutational effect of a protein sequence. The example below shows how to predict
+the mutational effect at a specific position.
+```
+from model.esm.esm_foldseek_mutation_model import EsmFoldseekMutationModel
+
+
+config = {
+    "foldseek_path": None,
+    "config_path": "/you/path/to/SaProt_650M_AF2",
+    "load_pretrained": True,
+}
+model = EsmFoldseekMutationModel(**config)
+tokenizer = model.tokenizer
+
+device = "cuda"
+model.eval()
+model.to(device)
+
+seq = "MdEvVpQpLrVyQdYaKv"
+
+# Predict the effect of mutating the 3rd amino acid to A
+mut_info = "V3A"
+mut_value = model.predict_mut(seq, mut_info)
+print(mut_value)
+
+# Predict all effects of mutations at 3rd position
+mut_pos = 3
+mut_dict = model.predict_pos_mut(seq, mut_pos)
+print(mut_dict)
+
+# Predict probabilities of all amino acids at 3rd position
+mut_pos = 3
+mut_dict = model.predict_pos_prob(seq, mut_pos)
+print(mut_dict)
+
+"""
+0.7908501625061035
+
+{'V3A': 0.7908501625061035, 'V3C': -0.9117952585220337, 'V3D': 2.7700226306915283, 'V3E': 2.3255627155303955, 'V3F': 0.2094242423772812, 'V3G': 2.699633836746216, 'V3H': 1.240191102027893, 'V3I': 0.10231903940439224, 'V3K': 1.804598093032837,
+'V3L': 1.3324960470199585, 'V3M': -0.18938277661800385, 'V3N': 2.8249857425689697, 'V3P': 0.40185314416885376, 'V3Q': 1.8361762762069702, 'V3R': 1.1899691820144653, 'V3S': 2.2159857749938965, 'V3T': 0.8813426494598389, 'V3V': 0.0, 'V3W': 0.5853186249732971, 'V3Y': 0.17449656128883362}
+
+{'A': 0.021275954321026802, 'C': 0.0038764977362006903, 'D': 0.15396881103515625, 'E': 0.0987202599644661, 'F': 0.011895398609340191, 'G': 0.14350374042987823, 'H': 0.03334535285830498, 'I': 0.010687196627259254, 'K': 0.058634623885154724, 'L': 0.03656982257962227, 'M': 0.00798324216157198, 'N': 0.16266827285289764, 'P': 0.014419485814869404, 'Q': 0.06051575019955635, 'R': 0.03171204403042793, 'S': 0.08847439289093018, 'T': 0.023291070014238358, 'V': 0.009647775441408157, 'W': 0.017323188483715057, 'Y': 0.011487090960144997}
+"""
 ```
 
 ## Prepare dataset
