@@ -1,7 +1,33 @@
 # SaProt: Protein Language Modeling with Structure-aware Vocabulary
+<a href="https://www.biorxiv.org/content/10.1101/2023.10.01.560349v3"><img src="https://img.shields.io/badge/Paper-bioRxiv-green" style="max-width: 100%;"></a>
+<a href="https://huggingface.co/westlake-repl/SaProt_650M_AF2"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-red?label=Model" style="max-width: 100%;"></a>
+<a href="https://portal.valencelabs.com/blogs/post/saprot-protein-language-modeling-with-structure-aware-vocabulary-uyLPrUZqyDF60Yr" alt="blog"><img src="https://img.shields.io/badge/Blog-Portal-violet" /></a> 
+<a href="https://zhuanlan.zhihu.com/p/664754366" alt="zhihu"><img src="https://img.shields.io/badge/Zhihu-知乎-blue" /></a> 
+
 The repository is an official implementation of [SaProt: Protein Language Modeling with Structure-aware Vocabulary](https://www.biorxiv.org/content/10.1101/2023.10.01.560349v2).
 
-If you have any question about the paper or the code, feel free to raise an issue!
+If you have any question about the paper or the code, feel free to raise an issue! Saprot should outperform ESM-2 in most tasks under fair evaluation settings.
+
+<details open><summary><b>Table of contents</b></summary>
+
+- [News](#News)
+- [Overview](#Overview)
+- [Environment installation](#Environment-installation)
+- [Prepare the SaProt model](#Prepare-the-SaProt-model)
+  - [Model checkpoints](#Model-checkpoints)
+  - [New experimental results](#New-experimental-results)
+- [Load SaProt](#Load-SaProt)
+  - [Hugging Face model](#Hugging-Face-model)
+  - [esm model](#esm-model)
+- [Convert protein structure into structure-aware sequence](#Convert-protein-structure-into-structure-aware-sequence)
+- [Predict mutational effect](#Predict-mutational-effect)
+- [Prepare dataset](#Prepare-dataset)
+  - [Pre-training dataset](#Pre-training-dataset)
+  - [Downstream tasks](#Downstream-tasks)
+- [Fine-tune SaProt](#Fine-tune-SaProt)
+- [Evaluate zero-shot performance](#Evaluate-zero-shot-performance)
+- [Citation](#Citation)
+</details>
 
 ## News
 - **2024/03/08**: We uploaded a simple function to make zero-shot prediction of mutational effect (see [example](#predict-mutational-effect)
@@ -17,7 +43,7 @@ Through large-scale pre-training, our model, i.e. SaProt, can learn the relation
 For more details, please refer to our paper https://www.biorxiv.org/content/10.1101/2023.10.01.560349v2.
 ![](figures/pipeline.png)
 
-## Installation
+## Environment installation
 ### Create a virtual environment
 ```
 conda create -n SaProt python=3.10
@@ -39,7 +65,7 @@ We provide two ways to use SaProt, including through huggingface class and  thro
 | [SaProt_650M_PDB](https://huggingface.co/westlake-repl/SaProt_650M_PDB) | 650M parameters | 40M AF2 structures (phase1) + 60K PDB structures (phase2) |
 | [SaProt_650M_AF2](https://huggingface.co/westlake-repl/SaProt_650M_AF2) | 650M parameters | 40M AF2 structures                                        |
 
-### New Experimental results
+### New experimental results
 
 Some experimental results are listed below. For more details, please refer to our paper.
 
@@ -72,7 +98,7 @@ We compare structures predicted by AF2 or ESMFold, which is shown below:
 
 ## Load SaProt
 
-### Huggingface model
+### Hugging Face model
 
 The following code shows how to load the model based on huggingface class.
 
