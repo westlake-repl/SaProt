@@ -27,6 +27,7 @@ If you have any question about the paper or the code, feel free to raise an issu
 - [Fine-tune SaProt](#Fine-tune-SaProt)
 - [Evaluate zero-shot performance](#Evaluate-zero-shot-performance)
 - [Citation](#Citation)
+- [Recruitment](#Recruitment)
 </details>
 
 ## News
