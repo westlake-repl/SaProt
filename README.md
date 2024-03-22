@@ -9,7 +9,8 @@ The repository is an official implementation of [SaProt: Protein Language Modeli
 If you have any question about the paper or the code, feel free to raise an issue! Saprot should outperform ESM-2 in most tasks under fair evaluation settings.
 
 > The laboratory is hiring research assistants, interns, doctoral students, and postdoctoral researchers. Please contact the corresponding author for details.
-实验室招聘科研助理，实习生，博士生和博士后，请联系通讯作者
+>
+>实验室招聘科研助理，实习生，博士生和博士后，请联系通讯作者
 
 <details open><summary><b>Table of contents</b></summary>
 
