@@ -60,8 +60,8 @@ class EsmAnnotationModel(EsmBaseModel):
         return loss
     
     def test_epoch_end(self, outputs):
-        preds = self.all_gather(torch.cat(self.test_aupr.preds, dim=-1))
-        target = self.all_gather(torch.cat(self.test_aupr.target, dim=-1)).long()
+        preds = self.all_gather(torch.cat(self.test_aupr.preds, dim=-1)).view(-1, self.num_labels)
+        target = self.all_gather(torch.cat(self.test_aupr.target, dim=-1)).long().view(-1, self.num_labels)
         fmax = count_f1_max(preds, target)
         
         log_dict = {"test_f1_max": fmax,
