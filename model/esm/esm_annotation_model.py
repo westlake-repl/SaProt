@@ -75,8 +75,8 @@ class EsmAnnotationModel(EsmBaseModel):
     def validation_epoch_end(self, outputs):
         aupr = self.valid_aupr.compute()
 
-        preds = self.all_gather(torch.cat(self.valid_aupr.preds, dim=-1))
-        target = self.all_gather(torch.cat(self.valid_aupr.target, dim=-1)).long()
+        preds = self.all_gather(torch.cat(self.valid_aupr.preds, dim=-1)).view(-1, self.num_labels)
+        target = self.all_gather(torch.cat(self.valid_aupr.target, dim=-1)).long().view(-1, self.num_labels)
         f1_max = count_f1_max(preds, target)
         
         log_dict = {"valid_f1_max": f1_max,
