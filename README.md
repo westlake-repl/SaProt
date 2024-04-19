@@ -155,7 +155,7 @@ from utils.foldseek_util import get_struc_seq
 pdb_path = "example/8ac8.cif"
 
 # Extract the "A" chain from the pdb file and encode it into a struc_seq
-# pLDDT is used to mask low-confidence regions if "plddt_path" is provided
+# pLDDT is used to mask low-confidence regions if "plddt_mask" is True
 parsed_seqs = get_struc_seq("bin/foldseek", pdb_path, ["A"])["A"]
 seq, foldseek_seq, combined_seq = parsed_seqs
 
