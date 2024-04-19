@@ -34,8 +34,8 @@ If you have any question about the paper or the code, feel free to raise an issu
 </details>
 
 ## News
-- **2024/04/18**: We found a slight difference for EC and GO evaluation and updated the re-evaluated results 
-(see [issue #23](https://github.com/westlake-repl/SaProt/issues/23) for details).
+- **2024/04/18**: We found a slight difference for EC and GO evaluation and updated the re-evaluated results on Github 
+and OpenReview (see [issue #23](https://github.com/westlake-repl/SaProt/issues/23) for details).
 - **2024/03/08**: We uploaded a simple function to make zero-shot prediction of mutational effect (see [example](#predict-mutational-effect)
 below).
 - **2024/01/17**: Our paper has been accepted as **ICLR 2024 spotlight** 🎉🎉🎉!
