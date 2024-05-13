@@ -34,6 +34,7 @@ If you have any question about the paper or the code, feel free to raise an issu
 </details>
 
 ## News
+- **2024/05/13**: SaProt achieved best performance on the ProteinGym benchmark🎉🎉🎉! See [here](#proteingym-benchmark).
 - **2024/04/18**: We found a slight difference for EC and GO evaluation and updated the re-evaluated results (see [issue #23](https://github.com/westlake-repl/SaProt/issues/23) for details).
 - **2024/03/08**: We uploaded a simple function to make zero-shot prediction of mutational effect (see [example](#predict-mutational-effect)
 below).
@@ -100,6 +101,11 @@ We compare structures predicted by AF2 or ESMFold, which is shown below:
 |                  |     AUC     |  Spearman's ρ  |    Spearman's ρ     |     Acc%     |         Acc%          |   Fmax    |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
 | SaProt (ESMFold) |    0.896    |     0.455      |        0.717        |    85.78     |         74.10         |   0.871   |   0.678   |   0.480   |   0.474   |          82.82          |       93.19        |
 |   SaProt (AF2)   |  **0.909**  |   **0.478**    |      **0.724**      |  **86.41**   |       **75.75**       | **0.882** | **0.682** | **0.486** | **0.479** |        **85.57**        |     **93.55**      |
+
+#### ProteinGym benchmark
+
+SaProt achieved the best performance on ProteinGym benchmark!
+![figures/proteingym.png](figures/proteingym.png)
 
 ## Load SaProt
 
