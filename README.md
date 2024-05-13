@@ -104,7 +104,7 @@ We compare structures predicted by AF2 or ESMFold, which is shown below:
 
 #### ProteinGym benchmark
 
-SaProt achieved first position on ProteinGym benchmark! The checkpoint was trained on Sep. 2023.
+SaProt achieved first position on ProteinGym benchmark! The [checkpoint](https://huggingface.co/westlake-repl/SaProt_650M_AF2) was trained on Sep. 2023.
 ![figures/proteingym.png](figures/proteingym.png)
 
 ![figures/proteingymofficial.png](figures/proteingymofficial.png)
