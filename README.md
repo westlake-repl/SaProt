@@ -34,7 +34,7 @@ If you have any question about the paper or the code, feel free to raise an issu
 </details>
 
 ## News
-- **2024/05/13**: SaProt ranked #1st  on the ProteinGym benchmark, while other top-ranked models are  hybrid and mutation-specialized model.🎉🎉🎉! See [here](#proteingym-benchmark).
+- **2024/05/13**: SaProt ranked #1st  on the ProteinGym benchmark in April2024, while other top-ranked models are  hybrid and mutation-specialized model.🎉🎉🎉! See [here](#proteingym-benchmark).
 - **2024/04/18**: We found a slight difference for EC and GO evaluation and updated the re-evaluated results (see [issue #23](https://github.com/westlake-repl/SaProt/issues/23) for details).
 - **2024/03/08**: We uploaded a simple function to make zero-shot prediction of mutational effect (see [example](#predict-mutational-effect)
 below).
