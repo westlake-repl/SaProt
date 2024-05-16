@@ -10,7 +10,7 @@ from utils.others import setup_seed
 
 
 @register_dataset
-class EsmRegressionDataset(LMDBDataset):
+class SaprotRegressionDataset(LMDBDataset):
 	def __init__(self,
 	             tokenizer: str,
 	             max_length: int = 1024,

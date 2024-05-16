@@ -8,7 +8,7 @@ from ..lmdb_dataset import *
 
 
 @register_dataset
-class EsmClassificationDataset(LMDBDataset):
+class SaprotClassificationDataset(LMDBDataset):
     def __init__(self,
                  tokenizer: str,
                  use_bias_feature: bool = False,

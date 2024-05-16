@@ -1,7 +1,7 @@
 setting:
   seed: 20000812
   os_environ:
-    WANDB_API_KEY: ~
+    WANDB_API_KEY: 6ed8c632f9676e109dad08100d9b636e69138eb7
     WANDB_RUN_ID: ~
     CUDA_VISIBLE_DEVICES: 0,1,2,3,4,5,6,7
     MASTER_ADDR: localhost
@@ -14,7 +14,7 @@ setting:
 
 model:
 #    Which model to use
-  model_py_path: esm/esm_annotation_model
+  model_py_path: saprot/saprot_annotation_model
   kwargs:
 #    Arguments to initialize the specific class
     config_path: weights/PLMs/esm2_t33_650M_UR50D
@@ -37,9 +37,9 @@ model:
 
 dataset:
 #    Arguments to initialize the basic class LMDBDataset
-  dataset_py_path: esm/esm_annotation_dataset
+  dataset_py_path: saprot/saprot_annotation_dataset
   dataloader_kwargs:
-    batch_size: 1
+    batch_size: 4
     num_workers: 8
 
   train_lmdb: LMDB/GO/AF2/BP/normal/train
@@ -56,12 +56,12 @@ Trainer:
   log_every_n_steps: 1
   strategy:
     find_unused_parameters: True
-  logger: False
+  logger: True
   enable_checkpointing: false
   val_check_interval: 0.5
   accelerator: gpu
-  devices: 1
+  devices: 8
   num_nodes: 1
-  accumulate_grad_batches: 1
+  accumulate_grad_batches: 2
   precision: 16
   num_sanity_val_steps: 0

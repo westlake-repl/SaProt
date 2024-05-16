@@ -4,11 +4,11 @@ import torchmetrics
 
 from torch.nn.functional import cross_entropy
 from ..model_interface import register_model
-from .base import EsmBaseModel
+from .base import SaprotBaseModel
 
 
 @register_model
-class EsmLMModel(EsmBaseModel):
+class SaprotLMModel(SaprotBaseModel):
     def __init__(self, **kwargs):
         super().__init__(task='lm', **kwargs)
     

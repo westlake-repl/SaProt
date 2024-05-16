@@ -15,7 +15,7 @@ setting:
 
 model:
 #    Which model to use
-  model_py_path: esm/esm_lm_model
+  model_py_path: saprot/saprot_lm_model
   kwargs:
 #    Arguments to initialize the specific class
     config_path: weights/PLMs/SaProt_650M_AF2
@@ -44,7 +44,7 @@ model:
 
 dataset:
 #    Arguments to initialize the basic class LMDBDataset
-  dataset_py_path: esm/esm_foldseek_dataset
+  dataset_py_path: saprot/saprot_foldseek_dataset
   dataloader_kwargs:
     batch_size: 8
     num_workers: 8

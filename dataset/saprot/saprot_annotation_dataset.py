@@ -9,7 +9,7 @@ from ..data_interface import register_dataset
 
 
 @register_dataset
-class EsmAnnotationDataset(LMDBDataset):
+class SaprotAnnotationDataset(LMDBDataset):
     def __init__(self,
                  tokenizer: str,
                  bias_feature: bool = False,

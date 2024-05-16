@@ -8,11 +8,11 @@ import numpy as np
 
 from utils.constants import aa_set, foldseek_struc_vocab, aa_list
 from ..model_interface import register_model
-from .base import EsmBaseModel
+from .base import SaprotBaseModel
 
 
 @register_model
-class EsmFoldseekMutationModel(EsmBaseModel):
+class SaprotFoldseekMutationModel(SaprotBaseModel):
     def __init__(self,
                  foldseek_path: str,
                  plddt_threshold: float = 0.,
@@ -38,7 +38,7 @@ class EsmFoldseekMutationModel(EsmBaseModel):
             
             log_dir: If log_clinvar is True, the model will save the predicted evolutionary indices for ClinVar variants
             
-            **kwargs: Other arguments for EsmBaseModel
+            **kwargs: Other arguments for SaprotBaseModel
         """
         self.foldseek_path = foldseek_path
         self.plddt_threshold = plddt_threshold

@@ -12,7 +12,7 @@ from data.data_transform import *
 
 
 @register_dataset
-class EsmSequenceDesignDataset(LMDBDataset):
+class SaprotSequenceDesignDataset(LMDBDataset):
     """
     Dataset of Mask Token Reconstruction with Structure information
     """

@@ -7,7 +7,7 @@ from ..data_interface import register_dataset
 
 
 @register_dataset
-class EsmPPIDataset(LMDBDataset):
+class SaprotPPIDataset(LMDBDataset):
     def __init__(self,
              tokenizer: str,
              max_length: int = 1024,
