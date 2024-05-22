@@ -175,7 +175,7 @@ print(f"combined_seq: {combined_seq}")
 We provide a function to predict the mutational effect of a protein sequence. The example below shows how to predict
 the mutational effect at a specific position.
 ```
-from model.esm.esm_foldseek_mutation_model import EsmFoldseekMutationModel
+from model.saprot.saprot_foldseek_mutation_model import SaprotFoldseekMutationModel
 
 
 config = {
@@ -183,7 +183,7 @@ config = {
     "config_path": "/you/path/to/SaProt_650M_AF2",
     "load_pretrained": True,
 }
-model = EsmFoldseekMutationModel(**config)
+model = SaprotFoldseekMutationModel(**config)
 tokenizer = model.tokenizer
 
 device = "cuda"
