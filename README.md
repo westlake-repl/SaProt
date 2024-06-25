@@ -1,9 +1,42 @@
 # SaProt: Protein Language Modeling with Structure-aware Vocabulary
+<a href="https://www.biorxiv.org/content/10.1101/2023.10.01.560349v3"><img src="https://img.shields.io/badge/Paper-bioRxiv-green" style="max-width: 100%;"></a>
+<a href="https://huggingface.co/westlake-repl/SaProt_650M_AF2"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-red?label=Model" style="max-width: 100%;"></a>
+<a href="https://portal.valencelabs.com/blogs/post/saprot-protein-language-modeling-with-structure-aware-vocabulary-uyLPrUZqyDF60Yr" alt="blog"><img src="https://img.shields.io/badge/Blog-Portal-violet" /></a> 
+<a href="https://zhuanlan.zhihu.com/p/664754366" alt="zhihu"><img src="https://img.shields.io/badge/Zhihu-知乎-blue" /></a> 
+
 The repository is an official implementation of [SaProt: Protein Language Modeling with Structure-aware Vocabulary](https://www.biorxiv.org/content/10.1101/2023.10.01.560349v2).
 
 If you have any question about the paper or the code, feel free to raise an issue! Saprot should outperform ESM-2 in most tasks under fair evaluation settings.
 
+> The laboratory is hiring research assistants, interns, doctoral students, and postdoctoral researchers. Please contact the corresponding author for details.
+>
+>实验室招聘科研助理，实习生，博士生和博士后，请联系通讯作者
+
+<details open><summary><b>Table of contents</b></summary>
+
+- [News](#News)
+- [Overview](#Overview)
+- [Environment installation](#Environment-installation)
+- [Prepare the SaProt model](#Prepare-the-SaProt-model)
+  - [Model checkpoints](#Model-checkpoints)
+  - [New experimental results](#New-experimental-results)
+- [Load SaProt](#Load-SaProt)
+  - [Hugging Face model](#Hugging-Face-model)
+  - [Load SaProt using esm repository](#Load-SaProt-using-esm-repository)
+- [Convert protein structure into structure-aware sequence](#Convert-protein-structure-into-structure-aware-sequence)
+- [Predict mutational effect](#Predict-mutational-effect)
+- [Prepare dataset](#Prepare-dataset)
+  - [Pre-training dataset](#Pre-training-dataset)
+  - [Downstream tasks](#Downstream-tasks)
+- [Fine-tune SaProt](#Fine-tune-SaProt)
+- [Evaluate zero-shot performance](#Evaluate-zero-shot-performance)
+- [Citation](#Citation)
+</details>
+
 ## News
+- **2024/05/13**: We developed SaprotHub to make protein language model training accessible to all biologists. [Go](https://github.com/westlake-repl/SaprotHub).
+- **2024/05/13**: SaProt ranked **#1st**  on the public ProteinGym benchmark in April2024, while other top-ranked models are  hybrid and mutation-specialized model.🎉🎉🎉! See [here](#proteingym-benchmark).
+- **2024/04/18**: We found a slight difference for EC and GO evaluation and updated the re-evaluated results (see [issue #23](https://github.com/westlake-repl/SaProt/issues/23) for details).
 - **2024/03/08**: We uploaded a simple function to make zero-shot prediction of mutational effect (see [example](#predict-mutational-effect)
 below).
 - **2024/01/17**: Our paper has been accepted as **ICLR 2024 spotlight** 🎉🎉🎉!
@@ -17,7 +50,7 @@ Through large-scale pre-training, our model, i.e. SaProt, can learn the relation
 For more details, please refer to our paper https://www.biorxiv.org/content/10.1101/2023.10.01.560349v2.
 ![](figures/pipeline.png)
 
-## Installation
+## Environment installation
 ### Create a virtual environment
 ```
 conda create -n SaProt python=3.10
@@ -39,40 +72,47 @@ We provide two ways to use SaProt, including through huggingface class and  thro
 | [SaProt_650M_PDB](https://huggingface.co/westlake-repl/SaProt_650M_PDB) | 650M parameters | 40M AF2 structures (phase1) + 60K PDB structures (phase2) |
 | [SaProt_650M_AF2](https://huggingface.co/westlake-repl/SaProt_650M_AF2) | 650M parameters | 40M AF2 structures                                        |
 
-### New Experimental results
+### New experimental results
 
 Some experimental results are listed below. For more details, please refer to our paper.
 
 #### 35M Model
 
 |    **Model**     | **ClinVar** | **ProteinGym** | **Thermostability** | **HumanPPI** | **Metal Ion Binding** |  **EC**   | **GO-MF** | **GO-BP** | **GO-CC** | DeepLoc-**Subcellular** | **DeepLoc-Binary** |
-| :--------------: | :---------: | :------------: | :-----------------: | :----------: | :-------------------: | :-------: | :-------: | :-------: | :-------: | :---------------------: | :----------------: |
+| :--------------: | :---------: | :------------: | :-----------------: | :----------: | :-------------------: |:---------:|:---------:|:---------:|:---------:| :---------------------: | :----------------: |
 |                  |     AUC     |  Spearman's ρ  |    Spearman's ρ     |     Acc%     |         Acc%          |   Fmax    |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
-|   ESM-2 (35M)    |    0.722    |     0.339      |        0.669        |    80.79     |         73.08         |   0.841   |   0.629   |   0.298   |   0.349   |          76.58          |       91.60        |
-| SaProt-Seq (35M) |    0.738    |     0.337      |        0.672        |    80.56     |         73.23         |   0.823   |   0.624   |   0.293   |   0.335   |          76.67          |       91.16        |
-|   SaProt (35M)   |  **0.794**  |   **0.392**    |      **0.692**      |  **81.11**   |       **74.29**       | **0.844** | **0.648** | **0.314** | **0.365** |        **78.09**        |     **91.97**      |
+|   ESM-2 (35M)    |    0.722    |     0.339      |        0.669        |    80.79     |         73.08         |   0.825   |   0.616   |   0.416   |   0.404   |          76.58          |       91.60        |
+| SaProt-Seq (35M) |    0.738    |     0.337      |        0.672        |    80.56     |         73.23         |   0.821   |   0.608   |   0.413   |   0.403   |          76.67          |       91.16        |
+|   SaProt (35M)   |  **0.794**  |   **0.392**    |      **0.692**      |  **81.11**   |       **74.29**       | **0.847** | **0.642** | **0.431** | **0.418** |        **78.09**        |     **91.97**      |
 
 #### 650M  Model
 
 |   **Model**   | **ClinVar** | **ProteinGym** | **Thermostability** | **HumanPPI** | **Metal Ion Binding** |  **EC**   | **GO-MF** | **GO-BP** | **GO-CC** | DeepLoc-**Subcellular** | **DeepLoc-Binary** |
-| :-----------: | :---------: | :------------: | :-----------------: | :----------: | :-------------------: | :-------: | :-------: | :-------: | :-------: | :---------------------: | :----------------: |
+| :-----------: | :---------: | :------------: | :-----------------: | :----------: | :-------------------: |:---------:|:---------:|:---------:|:---------:| :---------------------: | :----------------: |
 |               |     AUC     |  Spearman's ρ  |    Spearman's ρ     |     Acc%     |         Acc%          |   Fmax    |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
-| ESM-2 (650M)  |    0.862    |     0.475      |        0.680        |    76.67     |         71.56         |   0.877   |   0.668   |   0.345   |   0.411   |          82.09          |       91.96        |
-| SaProt (650M) |  **0.909**  |   **0.478**    |      **0.724**      |  **86.41**   |       **75.75**       | **0.884** | **0.678** | **0.356** | **0.414** |        **85.57**        |     **93.55**      |
+| ESM-2 (650M)  |    0.862    |     0.475      |        0.680        |    76.67     |         71.56         |   0.868   |   0.670   |   0.473   |   0.470   |          82.09          |       91.96        |
+| SaProt (650M) |  **0.909**  |   **0.478**    |      **0.724**      |  **86.41**   |       **75.75**       | **0.882** | **0.682** | **0.486** | **0.479** |        **85.57**        |     **93.55**      |
 
 #### AlphaFold2 vs. ESMFold
 
 We compare structures predicted by AF2 or ESMFold, which is shown below:
 
 |    **model**     | **ClinVar** | **ProteinGym** | **Thermostability** | **HumanPPI** | **Metal Ion Binding** |  **EC**   | **GO-MF** | **GO-BP** | **GO-CC** | DeepLoc-**Subcellular** | **DeepLoc-Binary** |
-| :--------------: | :---------: | :------------: | :-----------------: | :----------: | :-------------------: | :-------: | :-------: | :-------: | :-------: | :---------------------: | :----------------: |
+| :--------------: | :---------: | :------------: | :-----------------: | :----------: | :-------------------: |:---------:|:---------:|:---------:|:---------:| :---------------------: | :----------------: |
 |                  |     AUC     |  Spearman's ρ  |    Spearman's ρ     |     Acc%     |         Acc%          |   Fmax    |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
-| SaProt (ESMFold) |    0.896    |     0.455      |        0.717        |    85.78     |         74.10         |   0.870   |   0.675   |   0.340   |   0.407   |          82.82          |       93.19        |
-|   SaProt (AF2)   |  **0.909**  |   **0.478**    |      **0.724**      |  **86.41**   |       **75.75**       | **0.884** | **0.678** | **0.356** | **0.414** |        **85.57**        |     **93.55**      |
+| SaProt (ESMFold) |    0.896    |     0.455      |        0.717        |    85.78     |         74.10         |   0.871   |   0.678   |   0.480   |   0.474   |          82.82          |       93.19        |
+|   SaProt (AF2)   |  **0.909**  |   **0.478**    |      **0.724**      |  **86.41**   |       **75.75**       | **0.882** | **0.682** | **0.486** | **0.479** |        **85.57**        |     **93.55**      |
+
+#### ProteinGym benchmark
+
+SaProt achieved first position on ProteinGym benchmark! The [checkpoint](https://huggingface.co/westlake-repl/SaProt_650M_AF2) was trained on Sep. 2023.
+![figures/proteingym_benchmark.jpg](figures/proteingym_benchmark.jpg)
+
+![figures/proteingymofficial.png](figures/proteingymofficial.png)
 
 ## Load SaProt
 
-### Huggingface model
+### Hugging Face model
 
 The following code shows how to load the model based on huggingface class.
 
@@ -103,8 +143,9 @@ torch.Size([1, 11, 446])
 """
 ```
 
-### esm model
-The esm version is also stored in the same huggingface folder, named `SaProt_650M_AF2.pt`. We provide a function to load the model.
+### Load SaProt using esm repository
+User could also load SaProt by [esm](https://github.com/facebookresearch/esm) implementation. The checkpoint is
+stored in the same huggingface folder, named `SaProt_650M_AF2.pt`. We provide a function to load the model.
 ```
 from utils.esm_loader import load_esm_saprot
 
@@ -122,8 +163,9 @@ from utils.foldseek_util import get_struc_seq
 pdb_path = "example/8ac8.cif"
 
 # Extract the "A" chain from the pdb file and encode it into a struc_seq
-# pLDDT is used to mask low-confidence regions if "plddt_path" is provided
-parsed_seqs = get_struc_seq("bin/foldseek", pdb_path, ["A"])["A"]
+# pLDDT is used to mask low-confidence regions if "plddt_mask" is True. Please set it to True when
+# use AF2 structures for best performance.
+parsed_seqs = get_struc_seq("bin/foldseek", pdb_path, ["A"], plddt_mask=False)["A"]
 seq, foldseek_seq, combined_seq = parsed_seqs
 
 print(f"seq: {seq}")
@@ -135,7 +177,7 @@ print(f"combined_seq: {combined_seq}")
 We provide a function to predict the mutational effect of a protein sequence. The example below shows how to predict
 the mutational effect at a specific position.
 ```
-from model.esm.esm_foldseek_mutation_model import EsmFoldseekMutationModel
+from model.saprot.saprot_foldseek_mutation_model import SaprotFoldseekMutationModel
 
 
 config = {
@@ -143,7 +185,7 @@ config = {
     "config_path": "/you/path/to/SaProt_650M_AF2",
     "load_pretrained": True,
 }
-model = EsmFoldseekMutationModel(**config)
+model = SaprotFoldseekMutationModel(**config)
 tokenizer = model.tokenizer
 
 device = "cuda"
@@ -234,5 +276,4 @@ If you find this repository useful, please cite our paper:
   journal={bioRxiv},
   year={2023},
   publisher={Cold Spring Harbor Laboratory}
-}
 ```

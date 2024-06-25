@@ -10,7 +10,7 @@ from transformers import EsmConfig, EsmTokenizer, EsmForMaskedLM, EsmForSequence
 from ..abstract_model import AbstractModel
 
 
-class EsmBaseModel(AbstractModel):
+class SaprotBaseModel(AbstractModel):
     """
     ESM base model. It cannot be used directly but provides model initialization for downstream tasks.
     """

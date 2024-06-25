@@ -11,7 +11,7 @@ setting:
   dataset_dir: LMDB/ClinVar
 
 model:
-  model_py_path: esm/esm_foldseek_mutation_model
+  model_py_path: saprot/saprot_foldseek_mutation_model
   kwargs:
     foldseek_path: /sujin/bin/foldseek
     config_path: weights/PLMs/SaProt_650M_AF2

@@ -5,16 +5,16 @@ import torch
 from torch.nn.functional import binary_cross_entropy_with_logits
 from utils.metrics import count_f1_max
 from ..model_interface import register_model
-from .base import EsmBaseModel
+from .base import SaprotBaseModel
 
 
 @register_model
-class EsmAnnotationModel(EsmBaseModel):
+class SaprotAnnotationModel(SaprotBaseModel):
     def __init__(self, anno_type: str, **kwargs):
         """
         Args:
             anno_type: one of EC, GO, GO_MF, GO_CC
-            **kwargs: other parameters for EsmBaseModel
+            **kwargs: other parameters for SaprotBaseModel
         """
         label2num = {"EC": 585, "GO_BP": 1943, "GO_MF": 489, "GO_CC": 320}
         self.num_labels = label2num[anno_type]
@@ -60,8 +60,8 @@ class EsmAnnotationModel(EsmBaseModel):
         return loss
     
     def test_epoch_end(self, outputs):
-        preds = self.all_gather(torch.cat(self.test_aupr.preds, dim=-1))
-        target = self.all_gather(torch.cat(self.test_aupr.target, dim=-1)).long()
+        preds = self.all_gather(torch.cat(self.test_aupr.preds, dim=-1)).view(-1, self.num_labels)
+        target = self.all_gather(torch.cat(self.test_aupr.target, dim=-1)).long().view(-1, self.num_labels)
         fmax = count_f1_max(preds, target)
         
         log_dict = {"test_f1_max": fmax,
@@ -75,8 +75,8 @@ class EsmAnnotationModel(EsmBaseModel):
     def validation_epoch_end(self, outputs):
         aupr = self.valid_aupr.compute()
 
-        preds = self.all_gather(torch.cat(self.valid_aupr.preds, dim=-1))
-        target = self.all_gather(torch.cat(self.valid_aupr.target, dim=-1)).long()
+        preds = self.all_gather(torch.cat(self.valid_aupr.preds, dim=-1)).view(-1, self.num_labels)
+        target = self.all_gather(torch.cat(self.valid_aupr.target, dim=-1)).long().view(-1, self.num_labels)
         f1_max = count_f1_max(preds, target)
         
         log_dict = {"valid_f1_max": f1_max,

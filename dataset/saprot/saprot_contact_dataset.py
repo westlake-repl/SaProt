@@ -31,7 +31,7 @@ def pad_sequences(sequences, constant_value=0, dtype=None) -> np.ndarray:
 
 
 @register_dataset
-class EsmContactDataset(LMDBDataset):
+class SaprotContactDataset(LMDBDataset):
     def __init__(self,
                  tokenizer: str,
                  max_length: int = 1024,

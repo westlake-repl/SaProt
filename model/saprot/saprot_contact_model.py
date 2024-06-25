@@ -6,16 +6,16 @@ import math
 from torch.nn import Linear, ReLU
 from torch.nn.functional import cross_entropy
 from ..model_interface import register_model
-from .base import EsmBaseModel
+from .base import SaprotBaseModel
 
 
 @register_model
-class EsmContactModel(EsmBaseModel):
+class SaprotContactModel(SaprotBaseModel):
     def __init__(self, **kwargs):
         """
         Args:
             num_labels: number of labels
-            **kwargs: other arguments for EsmBaseModel
+            **kwargs: other arguments for SaprotBaseModel
         """
         super().__init__(task="base", **kwargs)
 

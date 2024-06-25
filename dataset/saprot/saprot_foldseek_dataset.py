@@ -28,7 +28,7 @@ def pad_sequences(sequences, constant_value=0, dtype=None) -> np.ndarray:
 
 
 @register_dataset
-class EsmFoldseekDataset(LMDBDataset):
+class SaprotFoldseekDataset(LMDBDataset):
 	"""
 	Dataset of Mask Token Reconstruction with Structure information
 	"""

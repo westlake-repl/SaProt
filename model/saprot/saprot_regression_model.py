@@ -3,16 +3,16 @@ import torchmetrics
 import torch
 
 from ..model_interface import register_model
-from .base import EsmBaseModel
+from .base import SaprotBaseModel
 
 
 @register_model
-class EsmRegressionModel(EsmBaseModel):
+class SaprotRegressionModel(SaprotBaseModel):
     def __init__(self, test_result_path: str = None, **kwargs):
         """
         Args:
             test_result_path: path to save test result
-            **kwargs: other arguments for EsmBaseModel
+            **kwargs: other arguments for SaprotBaseModel
         """
         self.test_result_path = test_result_path
         super().__init__(task="regression", **kwargs)
