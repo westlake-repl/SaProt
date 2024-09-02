@@ -128,7 +128,7 @@ model = EsmForMaskedLM.from_pretrained(model_path)
 device = "cuda"
 model.to(device)
 
-seq = "MdEvVpQpLrVyQdYaKv"
+seq = "M#EvVpQpL#VyQdYaKv" # Here "#" represents lower plDDT regions (plddt < 70)
 tokens = tokenizer.tokenize(seq)
 print(tokens)
 
@@ -139,7 +139,7 @@ outputs = model(**inputs)
 print(outputs.logits.shape)
 
 """
-['Md', 'Ev', 'Vp', 'Qp', 'Lr', 'Vy', 'Qd', 'Ya', 'Kv']
+['M#', 'Ev', 'Vp', 'Qp', 'L#', 'Vy', 'Qd', 'Ya', 'Kv']
 torch.Size([1, 11, 446])
 """
 ```
@@ -193,7 +193,7 @@ device = "cuda"
 model.eval()
 model.to(device)
 
-seq = "MdEvVpQpLrVyQdYaKv"
+seq = "M#EvVpQpL#VyQdYaKv" # Here "#" represents lower plDDT regions (plddt < 70)
 
 # Predict the effect of mutating the 3rd amino acid to A
 mut_info = "V3A"
