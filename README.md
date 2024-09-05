@@ -176,7 +176,7 @@ print(f"combined_seq: {combined_seq}")
 
 ## Predict mutational effect
 We provide a function to predict the mutational effect of a protein sequence. The example below shows how to predict
-the mutational effect at a specific position.
+the mutational effect at a specific position. If using the AF2 structure, we strongly recommend that you add pLDDT mask (see below). 
 ```
 from model.saprot.saprot_foldseek_mutation_model import SaprotFoldseekMutationModel
 
