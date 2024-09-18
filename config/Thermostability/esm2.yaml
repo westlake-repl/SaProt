@@ -1,7 +1,7 @@
 setting:
   seed: 20000812
   os_environ:
-    WANDB_API_KEY: 6ed8c632f9676e109dad08100d9b636e69138eb7
+    WANDB_API_KEY: ~
     WANDB_RUN_ID: ~
     CUDA_VISIBLE_DEVICES: 0,1,2,3,4,5,6,7
     MASTER_ADDR: localhost
