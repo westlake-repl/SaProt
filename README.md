@@ -115,7 +115,7 @@ SaProt achieved first position on ProteinGym benchmark! The [checkpoint](https:/
 
 ### Hugging Face model
 
-The following code shows how to load the model based on huggingface class.
+The following code shows how to load the model based on huggingface class. Note adding pLDDT regions for AF2 structures is beneficial.
 
 ```
 from transformers import EsmTokenizer, EsmForMaskedLM
