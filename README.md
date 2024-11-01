@@ -120,7 +120,7 @@ The following code shows how to load the model based on huggingface class. Note 
 ```
 from transformers import EsmTokenizer, EsmForMaskedLM
 
-model_path = "/your/path/to/SaProt_650M_AF2"
+model_path = "/your/path/to/SaProt_650M_AF2" # Note this is the directory path of SaProt, not the ".pt" file
 tokenizer = EsmTokenizer.from_pretrained(model_path)
 model = EsmForMaskedLM.from_pretrained(model_path)
 
@@ -183,7 +183,7 @@ from model.saprot.saprot_foldseek_mutation_model import SaprotFoldseekMutationMo
 
 config = {
     "foldseek_path": None,
-    "config_path": "/you/path/to/SaProt_650M_AF2",
+    "config_path": "/your/path/to/SaProt_650M_AF2", # Note this is the directory path of SaProt, not the ".pt" file
     "load_pretrained": True,
 }
 model = SaprotFoldseekMutationModel(**config)
