@@ -25,6 +25,7 @@ If you have any question about the paper or the code, feel free to raise an issu
   - [Load SaProt using esm repository](#Load-SaProt-using-esm-repository)
 - [Convert protein structure into structure-aware sequence](#Convert-protein-structure-into-structure-aware-sequence)
 - [Predict mutational effect](#Predict-mutational-effect)
+- [Get protein embeddings](#Get-protein-embeddings)
 - [Prepare dataset](#Prepare-dataset)
   - [Pre-training dataset](#Pre-training-dataset)
   - [Downstream tasks](#Downstream-tasks)
@@ -218,6 +219,37 @@ print(mut_dict)
 
 {'A': 0.021275954321026802, 'C': 0.0038764977362006903, 'D': 0.15396881103515625, 'E': 0.0987202599644661, 'F': 0.011895398609340191, 'G': 0.14350374042987823, 'H': 0.03334535285830498, 'I': 0.010687196627259254, 'K': 0.058634623885154724, 'L': 0.03656982257962227, 'M': 0.00798324216157198, 'N': 0.16266827285289764, 'P': 0.014419485814869404, 'Q': 0.06051575019955635, 'R': 0.03171204403042793, 'S': 0.08847439289093018, 'T': 0.023291070014238358, 'V': 0.009647775441408157, 'W': 0.017323188483715057, 'Y': 0.011487090960144997}
 """
+```
+
+## Get protein embeddings
+If you want to generate protein embeddings, you could refer to the following code. The embeddings are the average of
+the hidden states of the last layer.
+```python
+from model.saprot.base import SaprotBaseModel
+from transformers import EsmTokenizer
+
+
+config = {
+    "task": "base",
+    "config_path": "/your/path/to/SaProt_650M_AF2", # Note this is the directory path of SaProt, not the ".pt" file
+    "load_pretrained": True,
+}
+
+model = SaprotBaseModel(**config)
+tokenizer = EsmTokenizer.from_pretrained(config["config_path"])
+
+device = "cuda"
+model.to(device)
+
+seq = "M#EvVpQpL#VyQdYaKv" # Here "#" represents lower plDDT regions (plddt < 70)
+tokens = tokenizer.tokenize(seq)
+print(tokens)
+
+inputs = tokenizer(seq, return_tensors="pt")
+inputs = {k: v.to(device) for k, v in inputs.items()}
+
+embeddings = model.get_hidden_states(inputs, reduction="mean")
+print(embeddings[0].shape)
 ```
 
 ## Prepare dataset
