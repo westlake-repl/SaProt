@@ -118,7 +118,7 @@ SaProt achieved first position on ProteinGym benchmark! The [checkpoint](https:/
 
 The following code shows how to load the model based on huggingface class. Note masking lower pLDDT regions for AF2 structures is beneficial ,see below.
 
-```
+```python
 from transformers import EsmTokenizer, EsmForMaskedLM
 
 model_path = "/your/path/to/SaProt_650M_AF2" # Note this is the directory path of SaProt, not the ".pt" file
@@ -148,7 +148,7 @@ torch.Size([1, 11, 446])
 ### Load SaProt using esm repository
 User could also load SaProt by [esm](https://github.com/facebookresearch/esm) implementation. The checkpoint is
 stored in the same huggingface folder, named `SaProt_650M_AF2.pt`. We provide a function to load the model.
-```
+```python
 from utils.esm_loader import load_esm_saprot
 
 model_path = "/your/path/to/SaProt_650M_AF2.pt"
@@ -160,7 +160,7 @@ We provide a function to convert a protein structure into a structure-aware sequ
 [foldseek](https://github.com/steineggerlab/foldseek) 
 binary file to encode the structure. You can download the binary file from [here](https://drive.google.com/file/d/1B_9t3n_nlj8Y3Kpc_mMjtMdY0OPYa7Re/view?usp=sharing) and place it in the `bin` folder
 . The following code shows how to use it.
-```
+```python
 from utils.foldseek_util import get_struc_seq
 pdb_path = "example/8ac8.cif"
 
@@ -178,7 +178,7 @@ print(f"combined_seq: {combined_seq}")
 ## Predict mutational effect
 We provide a function to predict the mutational effect of a protein sequence. The example below shows how to predict
 the mutational effect at a specific position. If using the AF2 structure, we strongly recommend that you add pLDDT mask (see below). 
-```
+```python
 from model.saprot.saprot_foldseek_mutation_model import SaprotFoldseekMutationModel
 
 
