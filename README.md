@@ -26,6 +26,7 @@ If you have any question about the paper or the code, feel free to raise an issu
 - [Convert protein structure into structure-aware sequence](#Convert-protein-structure-into-structure-aware-sequence)
 - [Predict mutational effect](#Predict-mutational-effect)
 - [Get protein embeddings](#Get-protein-embeddings)
+- [Perform protein inverse folding](#Perform-protein-inverse-folding)
 - [Prepare dataset](#Prepare-dataset)
   - [Pre-training dataset](#Pre-training-dataset)
   - [Downstream tasks](#Downstream-tasks)
@@ -250,6 +251,29 @@ inputs = {k: v.to(device) for k, v in inputs.items()}
 
 embeddings = model.get_hidden_states(inputs, reduction="mean")
 print(embeddings[0].shape)
+```
+
+## Perform protein inverse folding
+We provide a function to perform protein inverse folding. Please see the example below.
+```python
+from model.saprot.saprot_if_model import SaProtIFModel
+
+# Load model
+config = {
+    "config_path": "/your/path/to/SaProt_650M_AF2_inverse_folding", # Please download the weights from https://huggingface.co/westlake-repl/SaProt_650M_AF2_inverse_folding
+    "load_pretrained": True,
+}
+
+device = "cuda"
+model = SaProtIFModel(**config)
+model = model.to(device)
+
+aa_seq = "##########" # All masked amino acids will be predicted. You could also partially mask the amino acids.
+struc_seq = "dddddddddd"
+
+# Predict amino acids given the structure sequence
+pred_aa_seq = model.predict(aa_seq, struc_seq)
+print(pred_aa_seq)
 ```
 
 ## Prepare dataset
