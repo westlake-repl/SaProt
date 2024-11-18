@@ -260,7 +260,8 @@ from model.saprot.saprot_if_model import SaProtIFModel
 
 # Load model
 config = {
-    "config_path": "/your/path/to/SaProt_650M_AF2_inverse_folding", # Please download the weights from https://huggingface.co/westlake-repl/SaProt_650M_AF2_inverse_folding
+    # Please download the weights from https://huggingface.co/westlake-repl/SaProt_650M_AF2_inverse_folding
+    "config_path": "/your/path/to/SaProt_650M_AF2_inverse_folding",
     "load_pretrained": True,
 }
 
