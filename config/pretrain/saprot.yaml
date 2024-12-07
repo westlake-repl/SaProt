@@ -19,7 +19,7 @@ model:
   kwargs:
 #    Arguments to initialize the specific class
     config_path: weights/PLMs/SaProt_650M_AF2
-    load_pretrained: False
+    load_pretrained: True
 
 #    Arguments to initialize the basic class AbstractModel
   lr_scheduler_kwargs:
