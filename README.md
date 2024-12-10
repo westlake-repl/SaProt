@@ -7,8 +7,9 @@
 
 The repository is an official implementation of [SaProt: Protein Language Modeling with Structure-aware Vocabulary](https://www.biorxiv.org/content/10.1101/2023.10.01.560349v2).
 
-##### 🔴 [Note: SaProt requires protein structure (SA token) input for optimal performance. For AA sequence-only use, finetuning is essential to match ESM2's (finetuning) performance. Frozen SaProt works for SA embeddings but not for AA embeddings.  Saprot should outperform ESM-2 in most tasks under fair evaluation settings. If you have any question about the paper or the code, feel free to raise an issue!](https://github.com/westlake-repl/SaProt?tab=readme-ov-file#saprot-protein-language-modeling-with-structure-aware-vocabulary-aa3di)
+##### 🔴 [Note: SaProt requires structural (SA token) input for optimal performance. Sequence-only use works well but must be finetuned - frozen SaProt works for SA but not AA embeddings. With structural input, SaProt surpasses ESM2 in fair comparisons.](https://github.com/westlake-repl/SaProt?tab=readme-ov-file#saprot-protein-language-modeling-with-structure-aware-vocabulary-aa3di)
 
+If you have any question about the paper or the code, feel free to raise an issue!
 
 > The laboratory is hiring research assistants, interns, doctoral students, and postdoctoral researchers. Please contact the corresponding author for details.
 >
