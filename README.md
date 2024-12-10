@@ -1,4 +1,7 @@
 # SaProt: Protein Language Modeling with Structure-aware Vocabulary (AA+3Di)
+
+### ⚠️ [Note: SaProt requires protein structure (SA token) input for optimal performance. For AA sequence-only use, finetuning is essential to match ESM2's (finetuning) performance. Frozen SaProt works for SA embeddings but not for AA embeddings](https://github.com/westlake-repl/SaProt/edit/main/README.md#%EF%B8%8F-note-saprot-requires-protein-structure-sa-token-input-for-optimal-performance-for-aa-sequence-only-use-finetuning-is-essential-to-match-esm2s-finetuning-performance-frozen-saprot-works-for-sa-embeddings-but-not-for-aa-embeddings)
+
 <a href="https://www.biorxiv.org/content/10.1101/2023.10.01.560349v3"><img src="https://img.shields.io/badge/Paper-bioRxiv-green" style="max-width: 100%;"></a>
 <a href="https://huggingface.co/westlake-repl/SaProt_650M_AF2"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-red?label=Model" style="max-width: 100%;"></a>
 <a href="https://portal.valencelabs.com/blogs/post/saprot-protein-language-modeling-with-structure-aware-vocabulary-uyLPrUZqyDF60Yr" alt="blog"><img src="https://img.shields.io/badge/Blog-Portal-violet" /></a> 
@@ -49,7 +52,6 @@ below).
 - **2023/10/30:** We released the results by using ESMFold structures. See Table below
 
 ## Overview
-⚠️⚠️⚠️**Note: SaProt requires protein structure (SA token) input for optimal performance. For AA sequence-only use, finetuning is essential to match ESM2's (finetuning) performance. Frozen SaProt works for SA embeddings but not for AA embeddings.**
 ![](figures/pipeline.png)
 
 ## Environment installation
