@@ -1,6 +1,6 @@
 # SaProt: Protein Language Modeling with Structure-aware Vocabulary (AA+3Di)
 
-⚠️ [Note: SaProt requires protein structure (SA token) input for optimal performance. For AA sequence-only use, finetuning is essential to match ESM2's (finetuning) performance. Frozen SaProt works for SA embeddings but not for AA embeddings.](https://github.com/westlake-repl/SaProt?tab=readme-ov-file#saprot-protein-language-modeling-with-structure-aware-vocabulary-aa3di)
+##⚠️ [Note: SaProt requires protein structure (SA token) input for optimal performance. For AA sequence-only use, finetuning is essential to match ESM2's (finetuning) performance. Frozen SaProt works for SA embeddings but not for AA embeddings.](https://github.com/westlake-repl/SaProt?tab=readme-ov-file#saprot-protein-language-modeling-with-structure-aware-vocabulary-aa3di)
 
 <a href="https://www.biorxiv.org/content/10.1101/2023.10.01.560349v3"><img src="https://img.shields.io/badge/Paper-bioRxiv-green" style="max-width: 100%;"></a>
 <a href="https://huggingface.co/westlake-repl/SaProt_650M_AF2"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-red?label=Model" style="max-width: 100%;"></a>
