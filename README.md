@@ -49,7 +49,7 @@ below).
 - **2023/10/30:** We released the results by using ESMFold structures. See Table below
 
 ## Overview
-**Note: SaProt requires protein structure (SA token) input for optimal performance. For AA sequence-only use, finetuning is essential to match ESM2's (finetuning) performance. Frozen SaProt works for SA embeddings but not for AA embeddings.**
+<font color="green"> Note: SaProt requires protein structure (SA token) input for optimal performance. For AA sequence-only use, finetuning is essential to match ESM2's (finetuning) performance. Frozen SaProt works for SA embeddings but not for AA embeddings. </font>
 ![](figures/pipeline.png)
 
 ## Environment installation
