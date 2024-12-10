@@ -49,10 +49,7 @@ below).
 - **2023/10/30:** We released the results by using ESMFold structures. See Table below
 
 ## Overview
-We propose a structure-aware vocabulary for protein language modeling. The vocabulary is constructed by encoding the 
-protein structure into discrete 3D tokens by using the [foldseek](https://github.com/steineggerlab/foldseek). We combine the residue tokens and the structure tokens to form a structure-aware sequence. 
-Through large-scale pre-training, our model, i.e. SaProt, can learn the relationship between the structure and the sequence.
-For more details, please refer to our paper https://www.biorxiv.org/content/10.1101/2023.10.01.560349v2.
+**Note: SaProt requires protein structure (SA token) input for optimal performance. For AA sequence-only use, finetuning is essential to match ESM2's (finetuning) performance. Frozen SaProt works for SA embeddings but not for AA embeddings.**
 ![](figures/pipeline.png)
 
 ## Environment installation
