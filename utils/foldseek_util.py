@@ -16,7 +16,7 @@ def get_struc_seq(foldseek,
                   path,
                   chains: list = None,
                   process_id: int = 0,
-                  plddt_mask: bool = True,
+                  plddt_mask: bool = "auto",
                   plddt_threshold: float = 70.,
                   foldseek_verbose: bool = False) -> dict:
     """
@@ -51,9 +51,9 @@ def get_struc_seq(foldseek,
     os.system(cmd)
     
     # Check whether the structure is predicted by AlphaFold2
-    with open(path, "r") as r:
-        if "alphafold" not in r.read().lower():
-            plddt_mask = False
+    if plddt_mask == "auto":
+        with open(path, "r") as r:
+            plddt_mask = True if "alphafold" in r.read().lower() else False
     
     seq_dict = {}
     name = os.path.basename(path)
