@@ -78,7 +78,7 @@ We provide two ways to use SaProt, including through huggingface class and  thro
 
 ### New experimental results
 
-Some experimental results are listed below. For more details, please refer to our paper.
+Some experimental results are listed below. For more details, please refer to our paper. For supervised fine-tuning tasks, the datasets were split based on 50% sequence identity.
 
 #### 35M Model
 
