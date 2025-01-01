@@ -9,7 +9,7 @@
 
 The repository is an official implementation of [SaProt: Protein Language Modeling with Structure-aware Vocabulary](https://openreview.net/forum?id=6MRm3G4NiU).
 
-We are pleased to announce that ColabSaprot [v1](https://colab.research.google.com/github/westlake-repl/SaprotHub/blob/main/colab/SaprotHub.ipynb)  [v2](https://colab.research.google.com/github/westlake-repl/SaprotHub/blob/main/colab/SaprotHub_v2.ipynb?hl=en) (New!!) and [SaprotHub](https://huggingface.co/SaProtHub) are now ready for use.
+We are pleased to announce that ColabSaprot [v2](https://colab.research.google.com/github/westlake-repl/SaprotHub/blob/main/colab/SaprotHub_v2.ipynb?hl=en)  and [SaprotHub](https://huggingface.co/SaProtHub) are now ready for use.
 
 If you have any question about the paper or the code, feel free to raise an issue!
 
