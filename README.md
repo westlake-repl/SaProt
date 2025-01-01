@@ -8,6 +8,7 @@
 [//]: # (##### 🔴 [Note: SaProt requires structural &#40;SA token&#41; input for optimal performance. AA-sequence-only mode works but must be finetuned - frozen embeddings work only for SA, not AA sequences! With structural input, SaProt surpasses ESM2 in most tasks.]&#40;https://github.com/westlake-repl/SaProt?tab=readme-ov-file#saprot-protein-language-modeling-with-structure-aware-vocabulary-aa3di&#41;)
 
 The repository is an official implementation of [SaProt: Protein Language Modeling with Structure-aware Vocabulary](https://openreview.net/forum?id=6MRm3G4NiU).
+
 We are pleased to announce that ColabSaprot [v1](https://colab.research.google.com/github/westlake-repl/SaprotHub/blob/main/colab/SaprotHub.ipynb)  [v2](https://colab.research.google.com/github/westlake-repl/SaprotHub/blob/main/colab/SaprotHub_v2.ipynb?hl=en) (New!!) and [SaprotHub](https://huggingface.co/SaProtHub) are now ready for use.
 
 If you have any question about the paper or the code, feel free to raise an issue!
