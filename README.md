@@ -41,6 +41,7 @@ If you have any question about the paper or the code, feel free to raise an issu
 </details>
 
 ## News
+- **2025/01/01:** SaProt has been extensively validated by multiple wet lab experiments see our work [SaprotHub](https://www.biorxiv.org/content/10.1101/2024.05.24.595648v5)
 - **2024/12/09:** We released Saprot 1.3B version! Download it from [HuggingFace](https://huggingface.co/westlake-repl/SaProt_1.3B_AF2)
 and see the experimental results [below](#SaProt-650M-vs-13B).
 - **2024/08/14:** over 20 outstanding researchers in Biology&Bioinformatics have joined SaprotHub as co-authors. [Joining us and contribute](https://github.com/westlake-repl/SaprotHub).
