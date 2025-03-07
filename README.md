@@ -13,9 +13,8 @@ We are pleased to announce that ColabSaprot [v2](https://colab.research.google.c
 
 If you have any question about the paper or the code, feel free to raise an issue!
 
-> The laboratory is hiring research assistants, interns, doctoral students, and postdoctoral researchers. Please contact the corresponding author for details.
->
->实验室招聘科研助理，实习生，博士生和博士后，请联系通讯作者
+> We have 2 PhD positions for international students at Westlake University, China! see [here](https://x.com/duguyuan/status/1897101692665258245).  
+
 
 <details open><summary><b>Table of contents</b></summary>
 
