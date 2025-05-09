@@ -41,7 +41,7 @@ If you have any question about the paper or the code, feel free to raise an issu
 
 ## News
 - **2025/01/01:** SaProt has been extensively validated by multiple wet lab experiments see our work [SaprotHub](https://www.biorxiv.org/content/10.1101/2024.05.24.595648v5)
-- **2024/12/09:** We released Saprot 1.3B version! Download it from [HuggingFace](https://huggingface.co/westlake-repl/SaProt_1.3B_AF2)
+- **2024/12/09:** We released Saprot 1.3B version! Download it from [HuggingFace 1.3B-AF2](https://huggingface.co/westlake-repl/SaProt_1.3B_AF2) and [HuggingFace 1.3B-AF2+OMG+NCBI](https://huggingface.co/westlake-repl/SaProt_1.3B_AFDB_OMG_NCBI)
 and see the experimental results [below](#SaProt-650M-vs-13B).
 - **2024/05/13:** We developed SaprotHub to make protein language model training accessible to all biologists. [Go](https://github.com/westlake-repl/SaprotHub).
 - **2024/05/13:** SaProt ranked **#1st**  on the public ProteinGym benchmark in April2024, while other top-ranked models are  hybrid and mutation-specialized model.🎉🎉🎉! See [here](#proteingym-benchmark).
