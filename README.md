@@ -108,17 +108,6 @@ We compare structures predicted by AF2 or ESMFold, which is shown below:
 | SaProt (ESMFold) |    0.896    |     0.455      |        0.717        |    85.78     |         74.10         |   0.871   |   0.678   |   0.480   |   0.474   |          82.82          |       93.19        |
 |   SaProt (AF2)   |  **0.909**  |   **0.478**    |      **0.724**      |  **86.41**   |       **75.75**       | **0.882** | **0.682** | **0.486** | **0.479** |        **85.57**        |     **93.55**      |
 
-#### SaProt 650M vs 1.3B
-We trained a 1.3B parameter version of SaProt. Results showed on par performance between SaProt 1.3B and 650M, 
-suggesting that increasing model size alone may not significantly improve performance. We welcome more evaluations 
-by the community.
-
-|   **model**   | **ClinVar** | **ProteinGym** | **Mega-scale** |
-|:-------------:|:-----------:|:--------------:|:--------------:|
-|               |     AUC     |  Spearman's ρ  |  Spearman's ρ  |
-| SaProt (650M) |    0.909    |     0.457      |     0.574      |
-| SaProt (1.3B) |  **0.910**  |   **0.460**    |   **0.588**    |
-
 
 #### ProteinGym benchmark
 
