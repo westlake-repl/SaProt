@@ -75,6 +75,7 @@ We provide two ways to use SaProt, including through huggingface class and  thro
 | [SaProt_35M_AF2](https://huggingface.co/westlake-repl/SaProt_35M_AF2) | 35M parameters  | 40M AF2 structures                                        |
 | [SaProt_650M_PDB](https://huggingface.co/westlake-repl/SaProt_650M_PDB) | 650M parameters | 40M AF2 structures (phase1) + 60K PDB structures (phase2) |
 | [SaProt_650M_AF2](https://huggingface.co/westlake-repl/SaProt_650M_AF2) | 650M parameters | 40M AF2 structures                                        |
+| [SaProt_1.3B_AFDB_OMG_NCBI](https://huggingface.co/westlake-repl/SaProt_1.3B_AFDB_OMG_NCBI) | 1.3B parameters | 40M AF2 structures + 200M OMG_prot50 + 150M NCBI (70% identity filtering)|
 
 ### New experimental results
 
