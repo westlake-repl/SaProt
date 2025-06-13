@@ -17,7 +17,7 @@ model:
   model_py_path: saprot/saprot_ppi_model
   kwargs:
 #    Arguments to initialize the specific class
-    config_path: weights/PLMs/SaProt_650M_AF2
+    config_path: /storage/yuanfajieLab/yuanfajie/sujin/Models/SaProt/SaProt_650M_AF2
     load_pretrained: True
 
 #    Arguments to initialize the basic class AbstractModel
@@ -41,12 +41,12 @@ dataset:
     batch_size: 4
     num_workers: 8
 
-  train_lmdb: LMDB/HumanPPI/foldseek/train
-  valid_lmdb: LMDB/HumanPPI/foldseek/valid
-  test_lmdb: LMDB/HumanPPI/foldseek/test
+  train_lmdb: /storage/yuanfajieLab/yuanfajie/sujin/Datasets/LMDB/PEER/HumanPPI/foldseek/train
+  valid_lmdb: /storage/yuanfajieLab/yuanfajie/sujin/Datasets/LMDB/PEER/HumanPPI/foldseek/valid
+  test_lmdb: /storage/yuanfajieLab/yuanfajie/sujin/Datasets/LMDB/PEER/HumanPPI/foldseek/test
 #    Arguments to initialize the specific class
   kwargs:
-    tokenizer: weights/PLMs/SaProt_650M_AF2
+    tokenizer: /storage/yuanfajieLab/yuanfajie/sujin/Models/SaProt/SaProt_650M_AF2
     plddt_threshold: 70
 
 
@@ -56,11 +56,11 @@ Trainer:
   log_every_n_steps: 1
   strategy:
     find_unused_parameters: True
-  logger: True
+  logger: False
   enable_checkpointing: false
   val_check_interval: 0.1
   accelerator: gpu
-  devices: 8
+  devices: 1
   num_nodes: 1
   accumulate_grad_batches: 2
   precision: 16

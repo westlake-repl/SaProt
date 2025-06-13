@@ -5,7 +5,6 @@ import json
 import torchmetrics
 import torch.distributed as dist
 
-from data.parse import parse_structure
 from utils.constants import aa_set, aa_list
 from ..model_interface import register_model
 from .base import SaprotBaseModel
