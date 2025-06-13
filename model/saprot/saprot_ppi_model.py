@@ -60,18 +60,18 @@ class SaprotPPIModel(SaprotBaseModel):
 
         return loss
 
-    def test_epoch_end(self, outputs):
+    def on_test_epoch_end(self):
         log_dict = self.get_log_dict("test")
-        log_dict["test_loss"] = torch.cat(self.all_gather(outputs), dim=-1).mean()
+        # log_dict["test_loss"] = torch.cat(self.all_gather(outputs), dim=-1).mean()
 
         print(log_dict)
         self.log_info(log_dict)
 
         self.reset_metrics("test")
 
-    def validation_epoch_end(self, outputs):
+    def on_validation_epoch_end(self):
         log_dict = self.get_log_dict("valid")
-        log_dict["valid_loss"] = torch.cat(self.all_gather(outputs), dim=-1).mean()
+        # log_dict["valid_loss"] = torch.cat(self.all_gather(outputs), dim=-1).mean()
 
         self.log_info(log_dict)
         self.reset_metrics("valid")
