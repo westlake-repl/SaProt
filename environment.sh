@@ -10,3 +10,4 @@ pip install lmdb==1.4.1
 pip install torchmetrics==0.9.3
 pip install pandas==2.1.1
 pip install fair-esm==2.0.0
+pip install protobuf<=3.20.1
