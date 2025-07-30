@@ -9,9 +9,9 @@
 
 The repository is an official implementation of [SaProt: Protein Language Modeling with Structure-aware Vocabulary](https://openreview.net/forum?id=6MRm3G4NiU).
 
-We are pleased to announce that ColabSaprot [v2](https://colab.research.google.com/github/westlake-repl/SaprotHub/blob/main/colab/SaprotHub_v2.ipynb?hl=en)  and [SaprotHub](https://huggingface.co/SaProtHub) are now ready for use.
+We are pleased to announce that  [ColabSaprot v2](https://colab.research.google.com/github/westlake-repl/SaprotHub/blob/main/colab/SaprotHub_v2.ipynb?hl=en)  and [SaprotHub](https://huggingface.co/SaProtHub) are now ready for use. [Go](https://github.com/westlake-repl/SaprotHub).
 
-If you have any question about the paper or the code, feel free to raise an issue!
+If you have any question about the paper or the code, feel free to raise an issue  or directly email us!
 
 > We have 2 PhD positions for international students at Westlake University, China! see [here](https://x.com/duguyuan/status/1897101692665258245).  
 
@@ -41,8 +41,7 @@ If you have any question about the paper or the code, feel free to raise an issu
 
 ## News
 - **2025/01/01:** SaProt has been extensively validated by multiple wet lab experiments see our work [SaprotHub](https://www.biorxiv.org/content/10.1101/2024.05.24.595648v5)
-- **2024/12/09:** We released Saprot 1.3B version! Download it from [HuggingFace](https://huggingface.co/westlake-repl/SaProt_1.3B_AF2)
-and see the experimental results [below](#SaProt-650M-vs-13B).
+- **2024/12/09:** We released Saprot 1.3B version! Download it from [HuggingFace 1.3B-AF2](https://huggingface.co/westlake-repl/SaProt_1.3B_AF2) and [HuggingFace 1.3B-AF2+OMG+NCBI](https://huggingface.co/westlake-repl/SaProt_1.3B_AFDB_OMG_NCBI). Saprot 1.3B  is better than the original SaProt 650M  in the aa-sequence-only tasks.
 - **2024/05/13:** We developed SaprotHub to make protein language model training accessible to all biologists. [Go](https://github.com/westlake-repl/SaprotHub).
 - **2024/05/13:** SaProt ranked **#1st**  on the public ProteinGym benchmark in April2024, while other top-ranked models are  hybrid and mutation-specialized model.🎉🎉🎉! See [here](#proteingym-benchmark).
 - **2024/04/18:** We found a slight difference for EC and GO evaluation and updated the re-evaluated results (see [issue #23](https://github.com/westlake-repl/SaProt/issues/23) for details).
@@ -76,10 +75,11 @@ We provide two ways to use SaProt, including through huggingface class and  thro
 | [SaProt_35M_AF2](https://huggingface.co/westlake-repl/SaProt_35M_AF2) | 35M parameters  | 40M AF2 structures                                        |
 | [SaProt_650M_PDB](https://huggingface.co/westlake-repl/SaProt_650M_PDB) | 650M parameters | 40M AF2 structures (phase1) + 60K PDB structures (phase2) |
 | [SaProt_650M_AF2](https://huggingface.co/westlake-repl/SaProt_650M_AF2) | 650M parameters | 40M AF2 structures                                        |
+| [SaProt_1.3B_AFDB_OMG_NCBI](https://huggingface.co/westlake-repl/SaProt_1.3B_AFDB_OMG_NCBI) | 1.3B parameters | 40M AF2 structures + 200M OMG_prot50 + 150M NCBI (70% identity filtering)|
 
 ### New experimental results
 
-Some experimental results are listed below. For more details, please refer to our paper. For supervised fine-tuning tasks, the datasets were split based on 50% sequence identity.
+Some experimental results are listed below. For more details, please refer to our paper. For supervised fine-tuning tasks, the datasets were split based on 30% sequence identity.
 
 #### 35M Model
 
@@ -107,17 +107,6 @@ We compare structures predicted by AF2 or ESMFold, which is shown below:
 |                  |     AUC     |  Spearman's ρ  |    Spearman's ρ     |     Acc%     |         Acc%          |   Fmax    |   Fmax    |   Fmax    |   Fmax    |          Acc%           |        Acc%        |
 | SaProt (ESMFold) |    0.896    |     0.455      |        0.717        |    85.78     |         74.10         |   0.871   |   0.678   |   0.480   |   0.474   |          82.82          |       93.19        |
 |   SaProt (AF2)   |  **0.909**  |   **0.478**    |      **0.724**      |  **86.41**   |       **75.75**       | **0.882** | **0.682** | **0.486** | **0.479** |        **85.57**        |     **93.55**      |
-
-#### SaProt 650M vs 1.3B
-We trained a 1.3B parameter version of SaProt. Results showed on par performance between SaProt 1.3B and 650M, 
-suggesting that increasing model size alone may not significantly improve performance. We welcome more evaluations 
-by the community.
-
-|   **model**   | **ClinVar** | **ProteinGym** | **Mega-scale** |
-|:-------------:|:-----------:|:--------------:|:--------------:|
-|               |     AUC     |  Spearman's ρ  |  Spearman's ρ  |
-| SaProt (650M) |    0.909    |     0.457      |     0.574      |
-| SaProt (1.3B) |  **0.910**  |   **0.460**    |   **0.588**    |
 
 
 #### ProteinGym benchmark
