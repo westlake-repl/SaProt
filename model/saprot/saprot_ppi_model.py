@@ -72,7 +72,8 @@ class SaprotPPIModel(SaprotBaseModel):
     def on_validation_epoch_end(self):
         log_dict = self.get_log_dict("valid")
         # log_dict["valid_loss"] = torch.cat(self.all_gather(outputs), dim=-1).mean()
-
+        
+        print(log_dict)
         self.log_info(log_dict)
         self.reset_metrics("valid")
         self.check_save_condition(log_dict["valid_acc"], mode="max")

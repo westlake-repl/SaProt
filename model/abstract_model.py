@@ -46,6 +46,8 @@ class AbstractModel(pl.LightningModule):
         self.save_path = save_path
         self.save_weights_only = save_weights_only
         
+        # temp_step is used for accumulating gradients
+        self.temp_step = 0
         self.step = 0
         self.epoch = 0
         
@@ -120,21 +122,35 @@ class AbstractModel(pl.LightningModule):
         model.load_state_dict(model_dict)
     
     # Add 1 to step after each optimizer step
+    # def optimizer_step(
+    #     self,
+    #     epoch: int,
+    #     batch_idx: int,
+    #     optimizer,
+    #     optimizer_idx: int = 0,
+    #     optimizer_closure=None,
+    #     on_tpu: bool = False,
+    #     using_native_amp: bool = False,
+    #     using_lbfgs: bool = False,
+    # ) -> None:
+    #     super().optimizer_step(
+    #         epoch, batch_idx, optimizer, optimizer_idx, optimizer_closure, on_tpu, using_native_amp, using_lbfgs
+    #     )
+    #     self.step += 1
+
     def optimizer_step(
         self,
         epoch: int,
         batch_idx: int,
         optimizer,
-        optimizer_idx: int = 0,
         optimizer_closure=None,
-        on_tpu: bool = False,
-        using_native_amp: bool = False,
-        using_lbfgs: bool = False,
     ) -> None:
-        super().optimizer_step(
-            epoch, batch_idx, optimizer, optimizer_idx, optimizer_closure, on_tpu, using_native_amp, using_lbfgs
-        )
-        self.step += 1
+        super().optimizer_step(epoch, batch_idx, optimizer, optimizer_closure)
+
+        self.temp_step += 1
+        if self.temp_step == self.trainer.accumulate_grad_batches:
+            self.step += 1
+            self.temp_step = 0
 
     def on_train_epoch_end(self):
         self.epoch += 1
