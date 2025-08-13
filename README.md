@@ -5,7 +5,7 @@
 <a href="https://portal.valencelabs.com/blogs/post/saprot-protein-language-modeling-with-structure-aware-vocabulary-uyLPrUZqyDF60Yr" alt="blog"><img src="https://img.shields.io/badge/Blog-Portal-violet" /></a> 
 <a href="https://zhuanlan.zhihu.com/p/664754366" alt="zhihu"><img src="https://img.shields.io/badge/Zhihu-知乎-blue" /></a> 
 
-[//]: # (##### 🔴 [Note: SaProt requires structural &#40;SA token&#41; input for optimal performance. AA-sequence-only mode works but must be finetuned - frozen embeddings work only for SA, not AA sequences! With structural input, SaProt surpasses ESM2 in most tasks.]&#40;https://github.com/westlake-repl/SaProt?tab=readme-ov-file#saprot-protein-language-modeling-with-structure-aware-vocabulary-aa3di&#41;)
+[//]: # (##### 🔴 [Note: SaProt-650M requires structural &#40;SA token&#41; input for optimal performance. AA-sequence-only mode works but must be finetuned - frozen embeddings work only for SA, not AA sequences! With structural input, SaProt surpasses ESM2 in most tasks.])
 
 The repository is an official implementation of [SaProt: Protein Language Modeling with Structure-aware Vocabulary](https://openreview.net/forum?id=6MRm3G4NiU).
 
