@@ -36,6 +36,7 @@ If you have any question about the paper or the code, feel free to raise an issu
 - [Prepare dataset](#Prepare-dataset)
   - [Pre-training dataset](#Pre-training-dataset)
   - [Downstream tasks](#Downstream-tasks)
+- [Pre-train SaProt](#Pre-train-SaProt)
 - [Fine-tune SaProt](#Fine-tune-SaProt)
 - [Evaluate zero-shot performance](#Evaluate-zero-shot-performance)
 - [Citation](#Citation)
@@ -289,6 +290,12 @@ We provide datasets that are used in the paper. Datasets can be downloaded from
 [here](https://drive.google.com/drive/folders/11dNGqPYfLE3M-Mbh4U7IQpuHxJpuRr4g?usp=sharing).
 
 Once downloaded, the datasets need to be decompressed and placed in the `LMDB` folder for supervised fine-tuning.
+
+## Pre-train SaProt
+We provide a script to pre-train SaProt on the [pre-training dataset](https://huggingface.co/datasets/westlake-repl/AF2_UniRef50):
+```
+python scripts/training.py -c config/pretrain/saprot.yaml
+```
 
 ## Fine-tune SaProt
 We provide a script to fine-tune SaProt on the datasets. The following code shows how to fine-tune SaProt on specific
