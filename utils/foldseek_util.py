@@ -16,7 +16,7 @@ def get_struc_seq(foldseek,
                   path,
                   chains: list = None,
                   process_id: int = 0,
-                  plddt_mask: bool = True,
+                  plddt_mask: bool = "auto",
                   plddt_threshold: float = 70.,
                   foldseek_verbose: bool = False) -> dict:
     """
@@ -45,15 +45,15 @@ def get_struc_seq(foldseek,
     
     tmp_save_path = f"get_struc_seq_{process_id}_{time.time()}.tsv"
     if foldseek_verbose:
-        cmd = f"{foldseek} structureto3didescriptor --threads 1 --chain-name-mode 1 {path} {tmp_save_path}"
+        cmd = f"{foldseek} structureto3didescriptor --threads 1 --chain-name-mode 1 \'{path}\' \'{tmp_save_path}\'"
     else:
-        cmd = f"{foldseek} structureto3didescriptor -v 0 --threads 1 --chain-name-mode 1 {path} {tmp_save_path}"
+        cmd = f"{foldseek} structureto3didescriptor -v 0 --threads 1 --chain-name-mode 1 \'{path}\' \'{tmp_save_path}\'"
     os.system(cmd)
     
     # Check whether the structure is predicted by AlphaFold2
-    with open(path, "r") as r:
-        if "alphafold" not in r.read().lower():
-            plddt_mask = False
+    if plddt_mask == "auto":
+        with open(path, "r") as r:
+            plddt_mask = True if "alphafold" in r.read().lower() else False
     
     seq_dict = {}
     name = os.path.basename(path)
@@ -61,10 +61,13 @@ def get_struc_seq(foldseek,
         for i, line in enumerate(r):
             desc, seq, struc_seq = line.split("\t")[:3]
             
+            name_chain = desc.split(" ")[0]
+            chain = name_chain.replace(name, "").split("_")[-1]
+            
             # Mask low plddt
             if plddt_mask:
                 try:
-                    plddts = extract_plddt(path)
+                    plddts = extract_plddt(path, chain)
                     assert len(plddts) == len(struc_seq), f"Length mismatch: {len(plddts)} != {len(struc_seq)}"
                     
                     # Mask regions with plddt < threshold
@@ -77,9 +80,6 @@ def get_struc_seq(foldseek,
                     print(f"Error: {e}")
                     print(f"Failed to mask plddt for {name}")
             
-            name_chain = desc.split(" ")[0]
-            chain = name_chain.replace(name, "").split("_")[-1]
-            
             if chains is None or chain in chains:
                 if chain not in seq_dict:
                     combined_seq = "".join([a + b.lower() for a, b in zip(seq, struc_seq)])
@@ -90,7 +90,7 @@ def get_struc_seq(foldseek,
     return seq_dict
 
 
-def extract_plddt(pdb_path: str) -> np.ndarray:
+def extract_plddt(pdb_path: str, chain: str) -> np.ndarray:
     """
     Extract plddt scores from pdb file.
     Args:
@@ -99,8 +99,6 @@ def extract_plddt(pdb_path: str) -> np.ndarray:
     Returns:
         plddts: plddt scores.
     """
-
-    # Initialize parser
     if pdb_path.endswith(".cif"):
         parser = MMCIFParser()
     elif pdb_path.endswith(".pdb"):
@@ -109,8 +107,10 @@ def extract_plddt(pdb_path: str) -> np.ndarray:
         raise ValueError("Invalid file format for plddt extraction. Must be '.cif' or '.pdb'.")
     
     structure = parser.get_structure('protein', pdb_path)
+    if structure is None or len(structure) == 0:
+        raise ValueError(f"Failed to parse structure from {pdb_path}")
     model = structure[0]
-    chain = model["A"]
+    chain = model[chain]
 
     # Extract plddt scores
     plddts = []
